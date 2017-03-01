@@ -1,13 +1,15 @@
 <div class="ui inverted menu">
   <div class="ui container">
     <div class="inverted header item">
-      <i class="large suitcase icon"></i>
-      DYEE Youth Jobs Dashboard
+      {{#link-to 'application'}}
+        <i class="large suitcase icon"></i>
+        DYEE Youth Jobs Dashboard
+      {{/link-to}}
     </div>
     <div class="right menu">
-      <a class="item">
+      {{#link-to 'applicants' class='item'}}
         Applicants
-      </a>
+      {{/link-to}}
       <a class="item">
         Campaigns
       </a>

@@ -8,15 +8,13 @@
   </thead>
   <tbody>
     {{#each model as |item|}}
-      <tr>
+      {{#link-to 'applicants.show' item tagName='tr' class='is-clickable'}}
         {{#each fields as |field|}}
           <td>
-            {{#link-to 'applicants.show' item}}
               {{get item field}}
-            {{/link-to}}
           </td>
         {{/each}}
-      </tr>
+      {{/link-to}}
     {{/each}}
   </tbody>
 </table>

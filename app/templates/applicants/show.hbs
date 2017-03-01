@@ -1,6 +1,8 @@
-<div style="position:fixed; z-index:9999; min-height: 1px; bottom:0; width:100%;">
-  <div class="ui container" style="width: 1150px;">
-    <div class="ui raised segment">
+<div class="force-scroll" style="height:calc(50vh)">
+</div>
+<div style="position:fixed; z-index:9999; height: calc(45vh); bottom:0; width:100%;">
+  <div class="ui container" style="width: 1150px; height:100%;">
+    <div class="ui raised segment" style="height:100%;">
       <h3 class="ui inverted block header">
         <i class="ui small user icon"></i>
         Applicant Profile
@@ -10,22 +12,28 @@
       {{/link-to}}
       <div class="ui basic segment">
         <h2 class="ui header">
-          <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg" class="ui image circular">
+          {{!-- <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg" class="ui image circular"> --}}
+          {{intersecting-map-tile lat=model.latitude lng=model.longitude}}
           <div class="content">
             {{model.first_name}} {{model.last_name}}
-            <div class="sub header">ID: {{model.icims_id}}</div>
+            <div class="sub header">Age {{model.age}} | ID: {{model.icims_id}}</div>
           </div>
         </h2>
         <div class="ui basic segment">
-          <div class="ui grid">
+          <div class="ui divided grid">
             <div class="ten wide column">
-              Content
+              <h3 class="ui disabled header">
+                Placed In
+              </h3>
+              <h2 class="ui header">
+                {{model.position_location}} as {{model.position_role}}
+              </h2>
             </div>
             <div class="six wide column">
               {{#if model.interests}}
-                <h4 class="ui header">
+                <h3 class="ui disabled header">
                   Interests
-                </h4>
+                </h3>
                 <ul class="ui list">
                   {{#each model.interests as |interest|}}
                     <li>{{interest}}</li>

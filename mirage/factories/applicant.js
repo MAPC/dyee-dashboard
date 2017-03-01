@@ -25,5 +25,8 @@ export default Factory.extend({
       ["Admin or Office Assistant","Sports, Fitness and/or Recreation"],
       ["Sports, Fitness and/or Recreation"]
     )(i);
-  }
+  },
+  age() { return faker.random.number({min:12, max:18}); },
+  position_location() { return faker.company.companyName(); },
+  position_role: faker.company.bs
 });
