@@ -1,0 +1,46 @@
+<div style="position:fixed; z-index:9999; min-height: 1px; bottom:0; width:100%;">
+  <div class="ui container" style="width: 1150px;">
+    <div class="ui raised segment">
+      <h3 class="ui inverted block header">
+        <i class="ui small user icon"></i>
+        Applicant Profile
+      </h3>
+      {{#link-to 'applicants' tagName='button' class='circular big blue ui icon button applicant-profile-close'}}
+        <i class="icon close"></i>
+      {{/link-to}}
+      <div class="ui basic segment">
+        <h2 class="ui header">
+          <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg" class="ui image circular">
+          <div class="content">
+            {{model.first_name}} {{model.last_name}}
+            <div class="sub header">ID: {{model.icims_id}}</div>
+          </div>
+        </h2>
+        <div class="ui basic segment">
+          <div class="ui grid">
+            <div class="ten wide column">
+              Content
+            </div>
+            <div class="six wide column">
+              {{#if model.interests}}
+                <h4 class="ui header">
+                  Interests
+                </h4>
+                <ul class="ui list">
+                  {{#each model.interests as |interest|}}
+                    <li>{{interest}}</li>
+                  {{/each}}
+                </ul>
+              {{else}}
+                <div class="ui disabled header">
+                  No Interests Specified
+                </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{outlet}}

@@ -12,5 +12,9 @@ export default DS.Model.extend({
   created_at: DS.attr('date'),
   updated_at: DS.attr('date'),
   lottery_number: DS.attr('number'),
-  interests: DS.attr()
+  interests: DS.attr(),
+  hasGeom: Ember.computed('latitude', 'longitude', function() {
+    let { latitude, longitude } = this.getProperties('latitude', 'longitude')
+    return latitude && longitude;
+  })
 });

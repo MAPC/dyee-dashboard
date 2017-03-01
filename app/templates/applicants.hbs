@@ -1,0 +1,24 @@
+<div class="ui container">
+  <h3 class="ui block inverted header">
+    Applicants
+  </h3>
+  <div class="ui grid">
+    <div class="ten wide column">
+      {{ui-table  fields=fields
+                  model=model}}
+    </div>
+    <div class="six wide column" style="padding-left: 0;">
+      {{#ui-visibility-sticky class="sticky-map"}}
+        {{#leaflet-map lat=42 lng=-71 zoom=10}}
+          {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+          {{#each model as |applicant|}}
+            {{circle-marker-layer radius=4 lat=applicant.latitude lng=applicant.longitude}}
+          {{/each}}
+        {{/leaflet-map}}
+      {{/ui-visibility-sticky}}
+    </div>
+  </div>
+  <div class="ui basic segment">
+  </div>
+</div>
+{{outlet}}

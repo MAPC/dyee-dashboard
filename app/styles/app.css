@@ -1,0 +1,20 @@
+.leaflet-container {
+  min-height: 400px;
+}
+
+.ui-visibility-sticky {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+}
+
+.sticky-map {
+  padding-right: 15px;
+}
+
+.applicant-profile-close {
+  right: -15px; 
+  position: absolute; 
+  top: -15px; 
+  margin-right: 0;
+}

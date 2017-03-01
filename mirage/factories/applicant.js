@@ -4,14 +4,14 @@ export default Factory.extend({
   first_name: faker.name.firstName,
   last_name: faker.name.lastName,
   email: faker.internet.email,
-  icims_id: faker.random.number({min: 1000000000 }),
+  icims_id() { return faker.random.number({min: 1000000000 }); },
   prefers_nearby: faker.random.boolean,
   has_transit_pass: faker.random.boolean,
-  latitude: faker.address.latitude([-84, -85]),
-  longitude: faker.address.longitude([-84, -85]),
+  latitude() { return Math.random() + 42; },
+  longitude() { return Math.random() + (-71); },
   created_at: faker.date.past,
   updated_at: faker.date.recent,
-  lottery_number: faker.random.number({min:100}),
+  lottery_number() { return faker.random.number({min:100}); },
   interests(i) {
     return faker.list.cycle(
       ["Community Organizing"],

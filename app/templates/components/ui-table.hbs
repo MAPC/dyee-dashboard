@@ -1,0 +1,22 @@
+<table class="ui sortable stackable selectable compact table">
+  <thead>
+    <tr>
+      {{#each fields as |field|}}
+        <th>{{field}}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |item|}}
+      <tr>
+        {{#each fields as |field|}}
+          <td>
+            {{#link-to 'applicants.show' item}}
+              {{get item field}}
+            {{/link-to}}
+          </td>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
