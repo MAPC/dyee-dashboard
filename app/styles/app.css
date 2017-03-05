@@ -1,5 +1,5 @@
 .leaflet-container {
-  min-height: 480px;
+  height: 480px;
 }
 
 .ui-visibility-sticky {
@@ -22,4 +22,8 @@
 
 .is-clickable {
   cursor: pointer;
+}
+
+body {
+  background-color: #fafafa;
 }

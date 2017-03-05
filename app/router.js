@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('applicants', { path: '/applicants' }, function() {
     this.route('show', { path: '/:id' });
   });
+  this.route('return-survey');
 });
 
 export default Router;

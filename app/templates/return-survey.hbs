@@ -1,0 +1,23 @@
+<div class="ui container">
+  <div class="ui segment">
+    {{#ui-dropdown class="search selection" allowAdditions=true selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class="default text">Types</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each selected_type_addition as |type|}}
+          <div class="item" data-value="{{map-value mapper type}}">
+            {{type}}
+          </div>
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+    {{#if selected}}
+      {{#ui-table  fields=fields
+                  model=model
+                  additionalField='Re-Hire'}}
+        {{ui-checkbox}}
+      {{/ui-table}}
+    {{/if}}
+  </div>
+</div>
+{{outlet}}

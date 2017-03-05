@@ -1,4 +1,4 @@
-<div class="force-scroll" style="height:calc(50vh)">
+{{!-- <div class="force-scroll" style="height:calc(50vh)">
 </div>
 <div style="position:fixed; z-index:9999; height: calc(45vh); bottom:0; width:100%;">
   <div class="ui container" style="width: 1150px; height:100%;">
@@ -12,8 +12,7 @@
       {{/link-to}}
       <div class="ui basic segment">
         <h2 class="ui header">
-          {{!-- <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg" class="ui image circular"> --}}
-          {{intersecting-map-tile lat=model.latitude lng=model.longitude}}
+          <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg" class="ui image circular">
           <div class="content">
             {{model.first_name}} {{model.last_name}}
             <div class="sub header">Age {{model.age}} | ID: {{model.icims_id}}</div>
@@ -50,5 +49,40 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
+<div class="ui modals page transition hidden"><div class="ui long test modal scrolling transition hidden" style="top: 0px;">
+    <div class="header">
+      Profile Picture
+    </div>
+    <div class="image content">
+      <div class="ui medium image">
+        <img src="/images/wireframe/image.png">
+      </div>
+      <div class="description">
+        <div class="ui header">Modal Header</div>
+        <p>This is an example of expanded content that will cause the modal's dimmer to scroll</p>
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
+        <div class="ui divider"></div>
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
+        <div class="ui divider"></div>
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
+        <div class="ui divider"></div>
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
+        <div class="ui divider"></div>
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
+        <div class="ui divider"></div>
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
+        <div class="ui divider"></div>
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
+        <div class="ui divider"></div>
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui primary approve button">
+        Proceed
+        <i class="right chevron icon"></i>
+      </div>
+    </div>
+  </div></div>
 {{outlet}}

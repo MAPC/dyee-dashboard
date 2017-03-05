@@ -11,7 +11,10 @@ export default Ember.Component.extend({
           type   : 'fixed',
           offset : 15,
           onUpdate: function() {
-            mapInstance.invalidateSize();
+            Ember.run.next(this, function() {
+              mapInstance.invalidateSize();
+              window.map=mapInstance;
+            });
           }
         })
       ;
