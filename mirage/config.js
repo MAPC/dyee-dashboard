@@ -3,6 +3,15 @@ export default function() {
 
   this.get('applicants');
   this.get('applicants/:id');
+  this.get('rehire_sites', (schema, request) => {
+    console.log(request.queryParams['filter[site_name]']);
+    return schema.rehireSites.where({ 'site_name': request.queryParams['filter[site_name]'] });
+  });
+  this.get('rehire_sites/get_uniq_sites', function(schema) {
+    return schema.rehireSites.all().models.map((item) => { return item['site_name']; });
+  });
+  this.patch('rehire_sites/:id');
+  this.passthrough('http://localhost:3000/**');
 
   // These comments are here to help you get started. Feel free to delete them.
 

@@ -1,23 +1,28 @@
 <div class="ui container">
+  <h1>DYEE Rehire Form</h1>
   <div class="ui segment">
-    {{#ui-dropdown class="search selection" allowAdditions=true selected=selected onChange=(action (mut selected)) as |execute mapper|}}
-      <div class="default text">Types</div>
-      <i class="dropdown icon"></i>
+    {{#ui-dropdown class="search fluid selection" allowAdditions=true selected=site_name onChange=(action (mut site_name)) as |execute mapper|}}
+      <div class="default text">Type to Search for your Organization</div>
+      {{#if site_name}}
+        <i class="delete red icon" {{action 'clearDropdown'}}></i>
+      {{else}}
+        <i class="dropdown icon"></i>
+      {{/if}}
+      
       <div class="menu">
-        {{#each selected_type_addition as |type|}}
-          <div class="item" data-value="{{map-value mapper type}}">
-            {{type}}
+        {{#each model.sites as |site|}}
+          <div class="item" data-value="{{map-value mapper site}}">
+            {{site}}
           </div>
         {{/each}}
       </div>
     {{/ui-dropdown}}
-    {{#if selected}}
-      {{#ui-table  fields=fields
-                  model=model
-                  additionalField='Re-Hire'}}
-        {{ui-checkbox}}
-      {{/ui-table}}
-    {{/if}}
   </div>
+  {{#liquid-if site_name}} 
+    <div class="ui segment">
+      {{ui-table-rehire  fields=fields
+                  model=(sort-by 'person_name' model.applicants)}}
+    </div>
+  {{/liquid-if}}
 </div>
 {{outlet}}

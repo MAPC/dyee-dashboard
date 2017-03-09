@@ -4,7 +4,7 @@
       {{#each fields as |field|}}
         <th>{{field}}</th>
       {{/each}}
-      <th>Should Rehire?</th>
+      <th>Rehire This Person?</th>
     </tr>
   </thead>
   <tbody>
@@ -15,8 +15,8 @@
             {{get item field}}
           </td>
         {{/each}}
-        <td>
-          {{ui-checkbox checked=item.should_rehire onChange=(action 'checkboxOnChange' item)}}
+        <td class="positive center aligned is-clickable" {{action 'checkboxOnChange' item (not item.should_rehire)}}>
+          {{ui-checkbox checked=item.should_rehire}}
         </td>
       </tr>
     {{/each}}

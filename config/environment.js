@@ -24,6 +24,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV['host'] = '';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -42,10 +43,16 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
+  if (environment === 'cbo_development') {
+    ENV['host'] = 'http://localhost:3000';
+  }
+
   if (environment === 'production') {
     ENV['ember-cli-mirage'] = {
       enabled: true
     }
+    ENV['host'] = 'http://youth-match.herokuapp.com';
+
   }
 
   return ENV;

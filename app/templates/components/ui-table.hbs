@@ -11,15 +11,10 @@
       {{#link-to 'applicants.show' item tagName='tr' class='is-clickable'}}
         {{#each fields as |field|}}
           <td>
-              {{get item field}}
+            {{get item field}}
           </td>
         {{/each}}
       {{/link-to}}
-      {{#if hasBlock}}
-        <td>
-          Re-Hire? {{yield}}
-        </td>
-      {{/if}}
     {{/each}}
   </tbody>
 </table>
