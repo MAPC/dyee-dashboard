@@ -23,6 +23,8 @@ module.exports = function(environment) {
     }
   };
 
+  ENV['host'] = '';
+
   if (environment === 'development') {
     ENV['host'] = '';
     // ENV.APP.LOG_RESOLVER = true;
@@ -51,7 +53,7 @@ module.exports = function(environment) {
     ENV['ember-cli-mirage'] = {
       enabled: true
     }
-    ENV['host'] = 'http://youth-match.herokuapp.com';
+    ENV['host'] = '';
 
   }
 

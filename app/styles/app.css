@@ -24,6 +24,10 @@
   cursor: pointer;
 }
 
+.is-not-interactive {
+  pointer-events: none;
+}
+
 body {
   background-color: #fafafa;
 }

@@ -16,7 +16,11 @@
           </td>
         {{/each}}
         <td class="positive center aligned is-clickable" {{action 'checkboxOnChange' item (not item.should_rehire)}}>
-          {{ui-checkbox checked=item.should_rehire}}
+          {{#if item.isSaving}}
+            <i class="large spinner loading icon"></i>
+          {{else}}
+            {{ui-checkbox checked=item.should_rehire}} 
+          {{/if}}
         </td>
       </tr>
     {{/each}}

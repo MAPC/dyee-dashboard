@@ -4,20 +4,22 @@ export default Ember.Component.extend({
   classNames: ['ui-visibility-sticky'],
   mapState: Ember.inject.service(),
   didInsertElement() {
-    let mapInstance = this.get('mapState.mapInstance.target');
-    Ember.run.next(this, function() {
+    Ember.run.next(this, () => {
+      var that = this;
       this.$()
         .visibility({
           type   : 'fixed',
           offset : 15,
-          onUpdate: function() {
-            Ember.run.next(this, function() {
-              mapInstance.invalidateSize();
-              window.map=mapInstance;
-            });
-          }
+          onUpdate: that.updateMap(that)
         })
       ;
     })
+  },
+  updateMap(that) {
+    let mapInstance = this.get('mapState.mapInstance.target');
+    if(mapInstance) {
+      mapInstance.invalidateSize();
+      window.map=mapInstance;
+    }
   }
 });

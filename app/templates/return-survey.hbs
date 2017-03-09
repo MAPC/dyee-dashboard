@@ -1,5 +1,29 @@
+<div class="ui inverted menu">
+  <div class="ui container">
+    <div class="inverted header item">
+      <h1>DYEE Rehire Form</h1>
+    </div>
+  </div>
+</div>
+{{#ui-visibility-sticky class='is-not-interactive'}}
+  <div class="ui equal width fluid grid" style="pointer-events: none;">
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column">
+      {{#each (sort-by 'isSaving' model.applicants) as |applicant|}}
+        <div class="ui notification transition" style={{if applicant.has_been_modified 'display:block;' 'display:none;'}}>
+          {{#if applicant.has_been_modified}}
+            <div class="ui green raised segment" style="opacity:0.6; margin-right: 1em; pointer-events: none;">
+              {{applicant.person_name}} will {{unless applicant.should_rehire 'not'}} be rehired.
+            </div>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+{{/ui-visibility-sticky}}
 <div class="ui container">
-  <h1>DYEE Rehire Form</h1>
   <div class="ui segment">
     {{#ui-dropdown class="search fluid selection" allowAdditions=true selected=site_name onChange=(action (mut site_name)) as |execute mapper|}}
       <div class="default text">Type to Search for your Organization</div>
