@@ -1,0 +1,24 @@
+<table class="ui sortable stackable selectable compact table">
+  <thead>
+    <tr>
+      {{#each fields as |field|}}
+        <th>{{field}}</th>
+      {{/each}}
+      <th>Should Rehire?</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |item|}}
+      <tr>
+        {{#each fields as |field|}}
+          <td>
+            {{get item field}}
+          </td>
+        {{/each}}
+        <td>
+          {{ui-checkbox checked=item.should_rehire onChange=(action 'checkboxOnChange' item)}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
