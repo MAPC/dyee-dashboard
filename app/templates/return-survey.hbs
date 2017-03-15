@@ -34,7 +34,7 @@
       {{/if}}
       
       <div class="menu">
-        {{#each model.sites as |site|}}
+        {{#each sorted_sites as |site|}}
           <div class="item" data-value="{{map-value mapper site}}">
             {{site}}
           </div>

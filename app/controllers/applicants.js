@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
             'last_name',
             'icims_id',
             'lottery_number',
-            'interests' ],
+            'truncatedInterests' ],
   actions: {
     linkTo(model) {
       this.transitionToRoute('applicants.show', model);

@@ -12,6 +12,7 @@ export default function() {
   });
   this.patch('rehire_sites/:id');
   this.passthrough('http://localhost:3000/**');
+  this.passthrough('https://youth-match-cbo.herokuapp.com/**');
 
   // These comments are here to help you get started. Feel free to delete them.
 

@@ -4,7 +4,7 @@ import CenterMapOnGeometry from '../../mixins/center-map-on-geometry';
 export default Ember.Route.extend(CenterMapOnGeometry, {
   mapState: Ember.inject.service(),
   model(param) {
-    return this.store.findRecord('applicant', param.id);
+    return this.modelFor('applicants').findBy('id', param.id);
   },
   afterModel() {
     let applicant = this.modelFor(this.routeName),

@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import { truncateText } from '../helpers/truncate-text';
 
 export default DS.Model.extend({
   first_name: DS.attr('string'),
@@ -20,5 +21,9 @@ export default DS.Model.extend({
     let { latitude, longitude } = this.getProperties('latitude', 'longitude')
     return latitude && longitude;
   }),
-  isSelected: false
+  isSelected: false,
+  truncatedInterests: Ember.computed('interests', function() {
+    let interests = this.get('interests');
+    return truncateText(interests, { limit: 10 })
+  })
 });

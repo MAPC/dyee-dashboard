@@ -1,7 +1,7 @@
 module.exports = function(deployTarget) {  
   return {
     pagefront: {
-      app: 'dyee',
+      app: 'dyee-dashboard',
       key: process.env.PAGEFRONT_KEY
     }
   };

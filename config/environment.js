@@ -49,11 +49,15 @@ module.exports = function(environment) {
     ENV['host'] = 'http://localhost:3000';
   }
 
+  if (environment === 'local_test_server') {
+    ENV['host'] = 'http://localhost:3000';
+  }
+
   if (environment === 'production') {
     ENV['ember-cli-mirage'] = {
-      enabled: true
+      enabled: false
     }
-    ENV['host'] = '';
+    ENV['host'] = 'http://54.145.243.75';
 
   }
 
