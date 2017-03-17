@@ -1,0 +1,18 @@
+<div class="ui divided list">
+  {{#each-in items as |key value|}}
+    {{log key value}}
+    {{#if (is-not-empty value)}}
+      <div class="item">
+        <strong>{{prettify-camel-case key}}</strong>
+        <div class="right floated content">
+          {{#if (eq (attribute-type value) 'boolean')}}
+            <i class="{{if value 'green checkmark' 'red remove'}} circle icon"></i>
+          {{else}}
+            {{value}}
+          {{/if}}
+        </div>
+      </div>
+    {{/if}} 
+  {{/each-in}}
+</div>
+{{yield}}

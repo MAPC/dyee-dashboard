@@ -1,88 +1,56 @@
-<div class="force-scroll" style="height:calc(50vh)">
+<div class="ui top attached menu">
+  {{#link-to 'applicants' class='circular accent-color ui icon item button'}}
+    <i class="icon left chevron" style="color: white;"></i>
+  {{/link-to}}
 </div>
-<div style="position:fixed; z-index:9999; height: calc(45vh); bottom:0; width:100%;">
-  <div class="ui container" style="width: 1150px; height:100%;">
-    <div class="ui raised segment" style="height:100%;">
-      <h3 class="ui inverted block header">
-        <i class="ui small user icon"></i>
-        Applicant Profile
-      </h3>
-      {{#link-to 'applicants' tagName='button' class='circular big blue ui icon button applicant-profile-close'}}
-        <i class="icon close"></i>
-      {{/link-to}}
+<div class="ui attached segment">
+  <h2 class="ui header">
+    <div class="content">
+      {{model.first_name}} {{model.last_name}}
+      <div class="sub header">Age {{model.age}} | ID: {{model.icims_id}}</div>
+    </div>
+  </h2>
+  <div class="ui divided stackable grid">
+    <div class="ten wide column">
       <div class="ui basic segment">
-        <h2 class="ui header">
-          <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg" class="ui image circular">
-          <div class="content">
-            {{model.first_name}} {{model.last_name}}
-            <div class="sub header">Age {{model.age}} | ID: {{model.icims_id}}</div>
-          </div>
-        </h2>
-        <div class="ui basic segment">
-          <div class="ui divided grid">
-            <div class="ten wide column">
-              <h3 class="ui disabled header">
-                Placed In
-              </h3>
-              <h2 class="ui header">
-                {{model.position_location}} as {{model.position_role}}
-              </h2>
-            </div>
-            <div class="six wide column">
-              {{#if model.interests}}
-                <h3 class="ui disabled header">
-                  Interests
-                </h3>
-                <ul class="ui list">
-                  {{#each model.interests as |interest|}}
-                    <li>{{interest}}</li>
-                  {{/each}}
-                </ul>
-              {{else}}
-                <div class="ui disabled header">
-                  No Interests Specified
-                </div>
-              {{/if}}
-            </div>
-          </div>
-        </div>
+        {{list-model-attributes fields=fields model=model}}
       </div>
+    </div>
+    <div class="six wide column">
+      <h3 class="ui secondary header">
+        Summary
+      </h3>
+      <ul class="ui list">
+        <li>Does {{if (not model.prefers_nearby) 'not'}} prefer nearby</li>
+        <li>{{if model.has_transit_pass 'Has transit pass' 'Does not have transit pass'}}</li>
+        <li>{{if model.in_school 'Is in school' 'Not in school'}}</li>
+        <li>{{if model.bps_student 'Is a BPS student' 'Is not a BPS student'}}</li>
+        <li>{{if model.english_first_language 'English is first language' 'English is not first language'}}</li>
+        {{#if model.fluent_other_language}}<li> Bi-lingual </li>{{/if}}
+        {{#if model.held_successlink_job_before}}<li>Has had a SuccessLink job before</li>{{/if}}
+        {{#if model.wants_to_return_to_previous_job}}<li>Wants to be rehired</li>{{/if}}
+        {{#if model.superteen_participant}}<li>Superteen</li>{{/if}}
+        {{#if model.receive_text_messages}}<li>Receives Text Messages</li>{{/if}}
+      </ul>
+      {{#if model.interests}}
+        <h3 class="ui secondary header">
+          Interests
+        </h3>
+        <ul class="ui list">
+          {{#each uniqInterests as |interest|}}
+            <li>{{interest}}</li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <div class="ui secondary header">
+          No Interests Specified
+        </div>
+      {{/if}}
     </div>
   </div>
+  <h3 class="ui header">
+    Essay
+  </h3>
+  {{model.participant_essay}}
 </div>
-{{!-- <div class="ui modals page transition hidden"><div class="ui long test modal scrolling transition hidden" style="top: 0px;">
-    <div class="header">
-      Profile Picture
-    </div>
-    <div class="image content">
-      <div class="ui medium image">
-        <img src="/images/wireframe/image.png">
-      </div>
-      <div class="description">
-        <div class="ui header">Modal Header</div>
-        <p>This is an example of expanded content that will cause the modal's dimmer to scroll</p>
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
-        <div class="ui divider"></div>
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
-        <div class="ui divider"></div>
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
-        <div class="ui divider"></div>
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
-        <div class="ui divider"></div>
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
-        <div class="ui divider"></div>
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
-        <div class="ui divider"></div>
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
-        <div class="ui divider"></div>
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/paragraph.png">
-      </div>
-    </div>
-    <div class="actions">
-      <div class="ui primary approve button">
-        Proceed
-        <i class="right chevron icon"></i>
-      </div>
-    </div>
-  </div></div> --}}
 {{outlet}}

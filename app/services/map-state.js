@@ -2,5 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   mapInstance: null,
-  bounds: [[42,-71], [40,-70]]
+  zoom: 11,
+  lat: 42.3,
+  lng: -71.05,
+  actions: {
+    setMapInstance(map) {
+      console.log(map);
+    }
+  }
 });

@@ -1,0 +1,23 @@
+{{#ui-table fields=fields
+            model=sortedModel
+            class='scrollable'
+            transition=transition}}
+  <div class="table-shadow"></div>
+  <div class="ui icon inverted vertical menu" style="position: absolute;z-index: 999;bottom: 30px; opacity:0.9; right:30px;">
+    <a class="icon item {{unless min 'disabled'}}" onclick={{if min (action 'first')}}>
+      <i class="angle double up icon"></i>
+    </a>
+    <a class="icon item {{unless min 'disabled'}}" onclick={{if min (action 'previous')}}>
+      <i class="up chevron icon"></i>
+    </a>
+    <div class="item">
+      {{page}}
+    </div>
+    <a class="icon item {{if (gte max model.length) 'disabled'}}" onclick={{action 'next'}} style="pointer-events: all;">
+      <i class="down chevron icon"></i>
+    </a>
+    <a class="icon item {{if (gte max model.length) 'disabled'}}" onclick={{action 'last'}} style="pointer-events: all;">
+      <i class="angle double down icon"></i>
+    </a>
+  </div>
+{{/ui-table}}

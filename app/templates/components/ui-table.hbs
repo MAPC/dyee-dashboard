@@ -1,20 +1,23 @@
-<table class="ui sortable stackable selectable compact table">
-  <thead>
-    <tr>
-      {{#each fields as |field|}}
-        <th>{{field}}</th>
-      {{/each}}
-    </tr>
-  </thead>
-  <tbody>
-    {{#each model as |item|}}
-      {{#link-to 'applicants.show' item tagName='tr' class='is-clickable'}}
+{{yield}}
+<table class="ui unstackable single line selectable compact table">
+  {{#liquid-bind model use=transition}}
+    <thead>
+      <tr>
         {{#each fields as |field|}}
-          <td>
-            {{get item field}}
-          </td>
+          <th>{{prettify-camel-case field}}</th>
         {{/each}}
-      {{/link-to}}
-    {{/each}}
-  </tbody>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |item|}}
+        {{#link-to 'applicants.show' item tagName='tr' class='is-clickable'}}
+          {{#each fields as |field|}}
+            <td>
+              {{get item field}}
+            </td>
+          {{/each}}
+        {{/link-to}}
+      {{/each}}
+    </tbody>
+  {{/liquid-bind}}
 </table>

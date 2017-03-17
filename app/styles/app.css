@@ -4,7 +4,7 @@
 
 .ui-visibility-sticky {
   position: absolute;
-  z-index: 9999;
+  z-index: 1;
   width: 100%;
 }
 
@@ -31,3 +31,46 @@
 body {
   background-color: #fafafa;
 }
+
+.ui.table {
+  margin-top: 0;
+}
+
+.scrollable {
+  overflow-x: scroll;
+}
+
+.ui.inverted.main.menu {
+  border-radius: 0px;
+}
+
+.liquid-child {
+  padding: 1px;
+}
+
+.ui.inverted.main.menu {
+  background: #0288D1;
+}
+
+.table-shadow {
+  border-right: 20px;
+  border-right-color: black;
+  height: 100%;
+  right: -20px;
+  width: 20px;
+  position: absolute;
+  background-color: transparent;
+  z-index: 9999;
+  -webkit-box-shadow: 9px 0px 30px 9px rgba(48, 50, 50, 0.53);
+  -moz-box-shadow:    9px 0px 30px 9px rgba(48, 50, 50, 0.53);
+  box-shadow:         9px 0px 30px 9px rgba(48, 50, 50, 0.53);
+}
+
+.dark-primary-color    { background: #0288D1 !important; }
+.default-primary-color { background: #03A9F4 !important; }
+.light-primary-color   { background: #B3E5FC !important; }
+.text-primary-color    { color: #FFFFFF !important; }
+.accent-color          { background: #FF5722 !important; }
+.primary-text-color    { color: #212121 !important; }
+.secondary-text-color  { color: #757575 !important; }
+.divider-color         { border-color: #BDBDBD !important; }

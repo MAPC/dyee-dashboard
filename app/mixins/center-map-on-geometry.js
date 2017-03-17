@@ -7,11 +7,13 @@ export default Ember.Mixin.create({
     let model = this.modelFor(this.routeName);
     let lat = model.get('latitude');
     let lng = model.get('longitude');
+    let zoom = 18;
     model.set('isSelected', true);
 
     mapState.setProperties({
       lat,
-      lng
+      lng,
+      zoom
     });
   },
   actions: {
