@@ -1,5 +1,8 @@
 .leaflet-container {
-  height: 480px;
+  height: 100%;
+}
+body>.ember-view {
+  height: 100%;
 }
 
 .ui-visibility-sticky {

@@ -10,8 +10,12 @@ export default function() {
   this.get('rehire_sites/get_uniq_sites', function(schema) {
     return schema.rehireSites.all().models.map((item) => { return item['site_name']; });
   });
+  this.get('jobs');
+  this.get('jobs/:id');
+  this.get('users/:id');
   this.patch('rehire_sites/:id');
   this.passthrough('http://localhost:3000/**');
+  this.passthrough('http://10.10.30.51:3000/**');
   this.passthrough('https://youth-match-cbo.herokuapp.com/**');
 
   // These comments are here to help you get started. Feel free to delete them.

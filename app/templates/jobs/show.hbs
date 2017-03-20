@@ -1,0 +1,47 @@
+<div class="ui top attached menu">
+  {{#link-to 'jobs' class='circular accent-color ui icon item button'}}
+    <i class="icon left chevron" style="color: white;"></i>
+  {{/link-to}}
+</div>
+<div class="ui attached segment">
+  <h2 class="ui header">
+    <div class="content">
+      {{model.site_name}}
+      <div class="sub header">ID: {{model.icims_id}}</div>
+    </div>
+  </h2>
+  <div class="ui divided stackable grid">
+    <div class="ten wide column">
+      <div class="ui basic segment">
+        {{list-model-attributes fields=fields model=model}}
+      </div>
+    </div>
+    <div class="six wide column">
+      <h3 class="ui secondary header">
+        Summary
+      </h3>
+      <ul class="ui list">
+
+      </ul>
+      {{#if model.interests}}
+        <h3 class="ui secondary header">
+          Interests
+        </h3>
+        <ul class="ui list">
+          {{#each uniqInterests as |interest|}}
+            <li>{{interest}}</li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <div class="ui secondary header">
+          No Interests Specified
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  <h3 class="ui header">
+    Essay
+  </h3>
+  {{model.participant_essay}}
+</div>
+{{outlet}}

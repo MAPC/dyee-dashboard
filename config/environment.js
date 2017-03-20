@@ -50,7 +50,10 @@ module.exports = function(environment) {
   }
 
   if (environment === 'local_test_server') {
-    ENV['host'] = 'http://localhost:3000';
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    }
+    ENV['host'] = 'http://10.10.30.51:3000';
   }
 
   if (environment === 'production') {
