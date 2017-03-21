@@ -6,7 +6,6 @@ export default Ember.Route.extend(updateMapBounds.reopen({ hashProperty: 'jobs',
   model(params) {
     return RSVP.hash({
       jobs: this.store.findAll('job'),
-      //todo: update with real token information
       user: this.store.find('user', 1)
     });
   }

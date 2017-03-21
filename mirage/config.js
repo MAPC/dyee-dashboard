@@ -14,6 +14,7 @@ export default function() {
   this.get('jobs/:id');
   this.get('users/:id');
   this.patch('rehire_sites/:id');
+  this.patch('jobs/:id');
   this.passthrough('http://localhost:3000/**');
   this.passthrough('http://10.10.30.51:3000/**');
   this.passthrough('https://youth-match-cbo.herokuapp.com/**');

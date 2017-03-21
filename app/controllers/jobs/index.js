@@ -1,20 +1,38 @@
 import Ember from 'ember';
+import { flatten } from '../../helpers/flatten';
 
 export default Ember.Controller.extend({
   fields: ['site_name', 'interests'],
   queryParams: ['min','max'],
   min: 0,
-  max: 20,
-  perPage: 20,
+  max: 8,
+  perPage: 8,
   transition: 'toUp',
+  selectedInterestCategories: null,
   page: Ember.computed('min','max','perPage', function() {
     let { max, perPage } = this.getProperties('max','perPage');
     return Math.round(max/perPage);
   }),
-  sortedModel: Ember.computed('model','min','max','perPage', function() {
-    let { model, min, max, perPage } = this.getProperties('model', 'min', 'max', 'perPage');
-    return model.jobs.sortBy('last_name').slice(min,max);
+  interestCategories: Ember.computed('model', function() {
+    let jobs = this.get('model.jobs');
+    return flatten(jobs.mapBy('interests')).uniq();
   }),
+  filteredModel: Ember.computed('model', 'selectedInterestCategories.[]', function() {
+    let { selectedInterestCategories, model } = this.getProperties('selectedInterestCategories', 'model');
+    return model.jobs.filter((el) => {
+      return !!intersect_safe(el.get('interests'), selectedInterestCategories).length;
+    });
+  }),
+  sortedModel: Ember.computed('filteredModel','min','max','perPage', function() {
+    let { filteredModel, min, max, perPage } = this.getProperties('filteredModel', 'min', 'max', 'perPage');
+    return filteredModel.sortBy('site_name').slice(min,max);
+  }),
+
+  source: Ember.computed('model', function() {
+    let applicants = this.get('model.jobs');
+    return applicants.map((el) => { return { title: el.get('site_name'), id: el.get('id'), description: el.get('interests') }; });
+  }),
+
   resource: 'jobs.show',
   actions: {
     previous() {
@@ -41,6 +59,37 @@ export default Ember.Controller.extend({
       this.set('transition', 'toUp');
       this.set('min', count - perPage);
       this.set('max', count);
+    },
+    addInterest(interest) {
+      this.send('first');
+      this.get('selectedInterestCategories').pushObject(interest);
+    },
+    removeInterest(interest) {
+      this.send('first');
+      this.get('selectedInterestCategories').removeObject(interest);
+    },
+    linkToApplicant(job) {
+      this.transitionToRoute('jobs.show', job.id);
     }
   }
 });
+
+function intersect_safe(a, b)
+{
+  var ai=0, bi=0;
+  var result = [];
+
+  while( ai < a.length && bi < b.length )
+  {
+     if      (a[ai] < b[bi] ){ ai++; }
+     else if (a[ai] > b[bi] ){ bi++; }
+     else /* they're equal */
+     {
+       result.push(a[ai]);
+       ai++;
+       bi++;
+     }
+  }
+
+  return result;
+}

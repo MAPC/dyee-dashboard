@@ -1,35 +1,30 @@
-<div class="ui container" style="height:100%;">
-  <div class="ui grid stackable" style="height:100%;">
-    <div class="ten wide column" style="padding-right:0px;">
-      <h1 class="ui header">
-        <div class="content">
-          Hello, {{model.user.first_name}}!
-          <div class="sub header">Here are jobs based on your interests.</div>
-        </div>
-      </h1>
-      <p>Your file says you're interested in {{model.user.applicant_interests}}.</p>
-      <p>{{interestCategories}}</p>
-      {{#ui-search class="ui search fluid" searchFullText=true onSelect=(action 'linkToApplicant') source=source}}
-        <input class="prompt" type="text" placeholder="Search by Name">
-        <div class="results"></div>
-      {{/ui-search}}
-      {{liquid-outlet}}
-    </div>
-    <div class="six wide column" style="padding-left: 0; border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
-      <div class="ui segment" style="padding: 0; height:100%;">
-        {{#leaflet-map onLoad=(action 'setMapInstance') zoom=mapState.zoom lat=mapState.lat lng=mapState.lng}}
-          {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-          {{#each model.jobs as |applicant|}}
-            {{circle-marker-layer fillColor=(if applicant.isSelected '#FF5722' '#03A9F4') 
-                                  stroke=0
-                                  fillOpacity=0.9
-                                  radius=(if applicant.isSelected '8' '4') 
-                                  lat=applicant.latitude 
-                                  lng=applicant.longitude 
-                                  onClick=(action 'linkTo' applicant)}}
-          {{/each}}
-        {{/leaflet-map}}
-        <div id="pagination">
+<div class="ui container viewport-vertical-height">
+  <div class="ui basic segment viewport-vertical-height">
+    <div class="ui grid stackable viewport-vertical-height">
+      <div class="eight wide column">
+        <h1 class="ui header">
+          <div class="content">
+            Hello, {{model.user.first_name}}!
+            <div class="sub header">Here are jobs based on your interests.</div>
+          </div>
+        </h1>
+        <p>Your file says you're interested in {{model.user.applicant_interests}}.</p>
+        {{liquid-outlet}}
+      </div>
+      <div class="eight wide column">
+        <div class="ui segment map-ui-segment">
+          {{#leaflet-map onLoad=(action 'setMapInstance') zoom=mapState.zoom lat=mapState.lat lng=mapState.lng}}
+            {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+            {{#each model.jobs as |applicant|}}
+              {{circle-marker-layer fillColor=(if applicant.isSelected '#FF5722' '#03A9F4') 
+                                    stroke=0
+                                    fillOpacity=0.9
+                                    radius=(if applicant.isSelected '8' '4') 
+                                    lat=applicant.latitude 
+                                    lng=applicant.longitude 
+                                    onClick=(action 'linkTo' applicant)}}
+            {{/each}}
+          {{/leaflet-map}}
         </div>
       </div>
     </div>

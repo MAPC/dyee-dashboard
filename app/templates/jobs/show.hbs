@@ -6,42 +6,22 @@
 <div class="ui attached segment">
   <h2 class="ui header">
     <div class="content">
-      {{model.site_name}}
-      <div class="sub header">ID: {{model.icims_id}}</div>
+      {{model.job.site_name}}
+      <div class="sub header">{{model.job.interests}}</div>
     </div>
   </h2>
-  <div class="ui divided stackable grid">
-    <div class="ten wide column">
-      <div class="ui basic segment">
-        {{list-model-attributes fields=fields model=model}}
-      </div>
-    </div>
-    <div class="six wide column">
-      <h3 class="ui secondary header">
-        Summary
-      </h3>
-      <ul class="ui list">
-
-      </ul>
-      {{#if model.interests}}
-        <h3 class="ui secondary header">
-          Interests
-        </h3>
-        <ul class="ui list">
-          {{#each uniqInterests as |interest|}}
-            <li>{{interest}}</li>
-          {{/each}}
-        </ul>
-      {{else}}
-        <div class="ui secondary header">
-          No Interests Specified
-        </div>
-      {{/if}}
-    </div>
+  {{model.job.description}}
+  <div class="ui horizontal divider">
+    Interested?
   </div>
-  <h3 class="ui header">
-    Essay
-  </h3>
-  {{model.participant_essay}}
+  {{#liquid-if isInterested}}
+    <div class="ui inverted green segment">
+      You've expressed interest in this job! You don't need to do anything else.
+    </div>
+  {{else}}
+    <div class="ui {{if isInterested 'green' 'blue'}} fluid button" onclick={{action 'toggleInterest'}}>
+      CLICK HERE
+    </div>
+  {{/liquid-if}}
 </div>
 {{outlet}}
