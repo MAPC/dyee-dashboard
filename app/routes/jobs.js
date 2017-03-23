@@ -5,8 +5,8 @@ import RSVP from 'rsvp';
 export default Ember.Route.extend(updateMapBounds.reopen({ hashProperty: 'jobs', modelName: 'jobs' }), {
   model(params) {
     return RSVP.hash({
-      jobs: this.store.findAll('job'),
-      user: this.store.find('user', 1)
+      jobs: this.store.findAll('position'),
+      user: this.store.findRecord('user', 1)
     });
   }
 });

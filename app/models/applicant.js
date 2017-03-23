@@ -49,7 +49,7 @@ export default DS.Model.extend({
     return latitude && longitude;
   }),
 
-  job: DS.belongsTo('job'),
+  positions: DS.hasMany('position'),
 
   user: DS.belongsTo({ async: true }),
 

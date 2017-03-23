@@ -1,15 +1,14 @@
 import DS from 'ember-data';
 import config from '../config/environment';
+import ApplicationAdapter from './application';
 
-export default DS.JSONAPIAdapter.extend({
+export default ApplicationAdapter.extend({
   namespace: 'api',
-  // host: Ember.computed(() => { return config.host || '/'; }),
-  host: 'http://localhost:4200',
+  host: Ember.computed(() => { return config.host || '/'; }),
   pathForType(type) {
     return Ember.String.underscore(type) + 's';
   },
   keyForAttribute(key) {
-    alert('test');
     return key;
   }
 });

@@ -3,6 +3,7 @@ import RSVP from 'rsvp';
 import CenterMapOnGeometry from '../../mixins/center-map-on-geometry';
 
 export default Ember.Route.extend(CenterMapOnGeometry.reopen({ hashProperty: 'job' }), {
+  mapState: Ember.inject.service(),
   model(param) {
     // return this.modelFor('jobs').jobs.findBy('id', param.id);
     const job = this.modelFor('jobs').jobs.findBy('id', param.id);
@@ -11,5 +12,15 @@ export default Ember.Route.extend(CenterMapOnGeometry.reopen({ hashProperty: 'jo
       job,
       user
     });
+  },
+  actions: {
+    // didTransition() {
+
+    //   alert('this hook is called!');
+    //   let mapState = this.get('mapState');
+    //   mapState.mapInstance.setZoom(18);
+    //   return this._super(...arguments);
+    // }
   }
+
 });

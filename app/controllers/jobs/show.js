@@ -18,10 +18,10 @@ export default Ember.Controller.extend({
       user.get('applicant').then((applicant)=> {
         if(value) {
           job.get('applicants').pushObject(applicant);
-          // job.save();
+          job.save();
         } else {
           job.get('applicants').removeObject(applicant);
-          // job.save();
+          job.save();
         }
       });
     }

@@ -4,7 +4,7 @@
       <div class="eight wide column">
         <h1 class="ui header">
           <div class="content">
-            Hello, {{model.user.first_name}}!
+            Hello, {{model.user.applicant.first_name}}!
             <div class="sub header">Here are jobs based on your interests.</div>
           </div>
         </h1>
@@ -13,13 +13,13 @@
       </div>
       <div class="eight wide column">
         <div class="ui segment map-ui-segment">
-          {{#leaflet-map onLoad=(action 'setMapInstance') zoom=mapState.zoom lat=mapState.lat lng=mapState.lng}}
+          {{#leaflet-map onLoad=(action 'setMapInstance') onMoveend=(action 'resetMap') bounds=mapState.bounds}}
             {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
             {{#each model.jobs as |applicant|}}
               {{circle-marker-layer fillColor=(if applicant.isSelected '#FF5722' '#03A9F4') 
                                     stroke=0
                                     fillOpacity=0.9
-                                    radius=(if applicant.isSelected '8' '4') 
+                                    radius=(if applicant.isSelected 8 4) 
                                     lat=applicant.latitude 
                                     lng=applicant.longitude 
                                     onClick=(action 'linkTo' applicant)}}

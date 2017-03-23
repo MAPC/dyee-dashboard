@@ -19,7 +19,10 @@ export default Ember.Mixin.create({
       }
     );
 
+
+
     let bounds = L.latLngBounds(LatLngs);
+    console.log(bounds);
     mapState.set('bounds', bounds);
     return this._super();
   },

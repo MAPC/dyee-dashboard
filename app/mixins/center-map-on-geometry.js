@@ -17,7 +17,14 @@ export default Ember.Mixin.create({
     let lng = model.get('longitude');
     let zoom = 18;
     model.set('isSelected', true);
-
+    if (mapState.get('mapInstance')) {
+      Ember.run.next(()=> {
+        mapState.get('mapInstance').panTo([lat,lng]);
+        Ember.run.later(()=> {
+          mapState.get('mapInstance').setZoom(18);
+        }, 250)
+      });
+    }
     mapState.setProperties({
       lat,
       lng,

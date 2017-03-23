@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { flatten } from '../../helpers/flatten';
 
 export default Ember.Controller.extend({
-  fields: ['site_name', 'interests'],
+  fields: ['site_name', 'title', 'open_positions', 'category'],
   queryParams: ['min','max'],
   min: 0,
   max: 8,
@@ -15,12 +15,13 @@ export default Ember.Controller.extend({
   }),
   interestCategories: Ember.computed('model', function() {
     let jobs = this.get('model.jobs');
-    return flatten(jobs.mapBy('interests')).uniq();
+    return flatten(jobs.mapBy('category')).uniq();
   }),
   filteredModel: Ember.computed('model', 'selectedInterestCategories.[]', function() {
     let { selectedInterestCategories, model } = this.getProperties('selectedInterestCategories', 'model');
+
     return model.jobs.filter((el) => {
-      return !!intersect_safe(el.get('interests'), selectedInterestCategories).length;
+      return selectedInterestCategories.includes(el.get('category'));
     });
   }),
   sortedModel: Ember.computed('filteredModel','min','max','perPage', function() {
@@ -54,8 +55,8 @@ export default Ember.Controller.extend({
       this.set('max', perPage);
     },
     last() {
-      let { model, perPage } = this.getProperties('model','perPage');
-      let count = model.get('length');
+      let { filteredModel, perPage } = this.getProperties('filteredModel','perPage');
+      let count = filteredModel.get('length');
       this.set('transition', 'toUp');
       this.set('min', count - perPage);
       this.set('max', count);

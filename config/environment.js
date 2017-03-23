@@ -1,6 +1,7 @@
 /* jshint node: true */
 
 module.exports = function(environment) {
+  var deployTarget = process.env.DEPLOY_TARGET;
   var ENV = {
     modulePrefix: 'dyee-summer-dashboard',
     environment: environment,
@@ -26,12 +27,19 @@ module.exports = function(environment) {
   ENV['host'] = '';
 
   if (environment === 'development') {
-    ENV['host'] = '';
+    ENV['host'] = 'http://localhost:4200';
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    }
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+  }
+
+  if (environment === 'development_rails') {
+    ENV['host'] = 'http://localhost:3000';
   }
 
   if (environment === 'test') {
@@ -45,15 +53,21 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
+  if (deployTarget === 'staging') {
+    ENV.host = '';
+  }
+
   if (environment === 'cbo_development') {
     ENV['host'] = 'http://localhost:3000';
   }
 
-  if (environment === 'local_test_server') {
+  if (environment === 'staging') {
     ENV['ember-cli-mirage'] = {
-      enabled: true
+      enabled: true,
+      namespace: '/api',
     }
-    ENV['host'] = 'http://10.10.30.51:3000';
+    ENV['baseURL'] = 'https://dyee-dashboard.staging.pagefrontapp.com';
+    ENV['host'] = '';
   }
 
   if (environment === 'production') {

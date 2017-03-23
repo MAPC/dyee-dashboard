@@ -2,9 +2,11 @@ import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
   site_name() { return faker.company.companyName(); },
-  latitude() { return Math.random() + 42; },
-  longitude() { return Math.random() + (-71); },
-  description() { return faker.lorem.paragraph() },
+  latitude() { return (-0.01 * (Math.random())) + 42.3; },
+  longitude() { return (-0.01 * (Math.random())) + (-71.17); },
+  job_title() { return faker.name.jobTitle(); },
+  description() { return faker.lorem.paragraph(); },
+  positions_available() { return faker.random.number(); },
   interests(i) {
     return faker.list.cycle(
       ["Community Organizing"],
@@ -18,7 +20,22 @@ export default Factory.extend({
       ["Sports, Fitness and/or Recreation"]
     )(i);
   },
-  afterCreate(job, server) {
-    server.create('applicant', { job });  
+  category(i) {
+    return faker.list.cycle(
+      "Community Organizing",
+      "Admin or Office Assistant",
+      "Community Organizing",
+      "Digital Media, Communications or Film",
+      "Sports, Fitness and/or Recreation",
+      "Admin or Office Assistant",
+      "Sports, Fitness and/or Recreation",
+      "Admin or Office Assistant",
+      "Sports, Fitness and/or Recreation"
+    )(i);
+  },
+  afterCreate(position, server) {
+    server.create('applicant', { positions: [position] });
+    server.create('applicant', { positions: [position] });  
+    server.create('applicant', { positions: [position] });  
   }
 });
