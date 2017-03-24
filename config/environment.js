@@ -74,7 +74,7 @@ module.exports = function(environment) {
     ENV['ember-cli-mirage'] = {
       enabled: false
     }
-    ENV['host'] = 'http://54.145.243.75';
+    ENV['host'] = 'https://dyee.mapc.org';
 
   }
 
