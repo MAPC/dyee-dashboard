@@ -6,7 +6,9 @@ export default Ember.Route.extend(updateMapBounds.reopen({ hashProperty: 'jobs',
   model(params) {
     return RSVP.hash({
       jobs: this.store.findAll('position'),
-      user: this.store.findRecord('user', 1)
+      user: this.store.query('user', { email: 'mgardner@mapc.org' }).then((user) => {
+        return user.get('firstObject');
+      })
     });
   }
 });
