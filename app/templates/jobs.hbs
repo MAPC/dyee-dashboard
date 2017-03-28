@@ -15,14 +15,25 @@
         <div class="ui segment map-ui-segment">
           {{#leaflet-map onLoad=(action 'setMapInstance') onMoveend=(action 'resetMap') bounds=mapState.bounds}}
             {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-            {{#each model.jobs as |applicant|}}
-              {{circle-marker-layer fillColor=(if applicant.isSelected '#FF5722' '#03A9F4') 
+            {{#each clusters as |site|}}
+              {{#circle-marker-layer fillColor=(if site.isSelected '#FF5722' '#03A9F4') 
                                     stroke=0
                                     fillOpacity=0.9
-                                    radius=(if applicant.isSelected 8 4) 
-                                    lat=applicant.latitude 
-                                    lng=applicant.longitude 
-                                    onClick=(action 'linkTo' applicant)}}
+                                    radius=(if site.isSelected 8 4) 
+                                    lat=site.latitude 
+                                    lng=site.longitude }}
+                {{#popup-layer}}
+                  <ul>
+                    {{#each site.values as |job|}}
+                      <li>
+                        {{link-to job.title 'jobs.show' job.id}}
+                      </li>
+                    {{/each}}
+                  </ul>
+                {{/popup-layer}}
+              {{/circle-marker-layer}}
+
+              {{!-- onClick=(action 'linkTo' site) --}}
             {{/each}}
           {{/leaflet-map}}
         </div>

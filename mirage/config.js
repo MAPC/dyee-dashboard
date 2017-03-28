@@ -13,6 +13,7 @@ export default function() {
   this.get('positions');
   this.get('positions/:id');
   this.get('users/:id');
+  this.get('users');
   this.patch('rehire_sites/:id');
   this.patch('positions/:id');
   this.patch('applicants/:id');
