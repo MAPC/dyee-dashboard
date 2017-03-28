@@ -21,9 +21,13 @@
                                     fillOpacity=0.9
                                     radius=(if site.isSelected 8 4) 
                                     lat=site.latitude 
-                                    lng=site.longitude }}
+                                    lng=site.longitude
+                                    onClick=(if site.hasManyJobs '' (action 'linkTo' site.values.firstObject)) }}
                 {{#popup-layer}}
                   <ul>
+                    <h3 class="ui header">
+                      {{site.values.length}} at this location:
+                    </h3>
                     {{#each site.values as |job|}}
                       <li>
                         {{link-to job.category 'jobs.show' job.id}}
@@ -32,9 +36,9 @@
                   </ul>
                 {{/popup-layer}}
               {{/circle-marker-layer}}
-
-              {{!-- onClick=(action 'linkTo' site) --}}
             {{/each}}
+            <div class="map-information" id="cbo-info-segment">
+            </div>
           {{/leaflet-map}}
         </div>
       </div>

@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
             .entries(positions.toArray())
             .map((row) => {   row.latitude = row.values[0].get('latitude');
                               row.longitude = row.values[0].get('longitude');
-
+                              row.hasManyJobs = (row.values.length > 1);
                               // is a job within the cluster selected?
                               row.isSelected = row.values.mapBy('isSelected').includes(true);
                               return row;  });

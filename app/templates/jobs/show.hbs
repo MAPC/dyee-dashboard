@@ -24,4 +24,16 @@
     </div>
   {{/liquid-if}}
 </div>
+{{#ember-wormhole to='cbo-info-segment'}}
+  <h3 class="ui top attached header">
+    Contact Information
+  </h3>
+  <div class="ui raised attached segment cbo-contact-info">
+    <div class="ui list">
+      <div class="item">Primary Contact Person: {{model.job.primary_contact_person}} ({{model.job.primary_contact_person_title}})</div>
+      <div class="item">Contact Phone: {{model.job.primary_contact_person_phone}}</div>
+      <div class="item">Site Phone: {{model.job.site_phone}}</div>
+    </div>
+  </div>
+{{/ember-wormhole}}
 {{outlet}}
