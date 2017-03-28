@@ -1,7 +1,8 @@
 {{#ui-table fields=fields
             model=sortedModel
             class='scrollable'
-            transition=transition}}
+            transition=transition
+            resource=resource}}
   <div class="table-shadow"></div>
   <div class="ui icon inverted vertical menu" style="position: absolute;z-index: 999;bottom: 30px; opacity:0.9; right:30px;">
     <a class="icon item {{unless min 'disabled'}}" onclick={{if min (action 'first')}}>

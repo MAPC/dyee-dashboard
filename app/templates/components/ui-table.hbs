@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       {{#each model as |item|}}
-        {{#link-to 'applicants.show' item tagName='tr' class='is-clickable'}}
+        {{#link-to (or resource 'applicants.show') item.id tagName='tr' class='is-clickable'}}
           {{#each fields as |field|}}
             <td>
               {{get item field}}

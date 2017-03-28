@@ -1,0 +1,56 @@
+<div class="ui horizontal divider">
+  Search Job
+</div>
+{{#ui-search class="ui search fluid category-search" searchFullText=true onSelect=(action 'linkToApplicant') source=source}}
+  <input class="prompt category-search" type="text" placeholder="Search by Name">
+  <div class="results"></div>
+{{/ui-search}}
+<div class="ui horizontal divider">
+  Filters
+</div>
+<div class="ui circular labels">
+  {{#each interestCategories as |interest|}}
+    {{#if (contains interest selectedInterestCategories)}}
+      <a class="ui blue horizontal label" onclick={{action 'removeInterest' interest}}>{{interest}}</a>
+    {{else}}
+      <a class="ui horizontal label" onclick={{action 'addInterest' interest}}>{{interest}}</a>
+    {{/if}}
+  {{/each}}
+</div>
+<div class="ui horizontal divider">
+  Job Results
+</div>
+<div class="ui segment">
+  {{#if filteredModel.length}}
+    {{#ui-table fields=fields
+                model=sortedModel
+                class='scrollable'
+                transition=transition
+                resource=resource}}
+                <div class="table-shadow"></div>
+    {{/ui-table}}
+  {{else}}
+    <h3 class="ui center aligned disabled header">
+      No Results - Select the categories above for more options
+    </h3>
+  {{/if}}
+</div>
+{{#if (gt model.jobs.length 20)}}
+  <div class="ui basic segment center aligned">
+    <button class="circular ui icon button {{if min 'secondary' 'disabled'}}" onclick={{if min (action 'first')}}>
+      <i class="angle double up icon"></i>
+    </button>
+    <button class="circular ui icon button {{if min 'primary' 'disabled'}}" onclick={{if min (action 'previous')}}>
+      <i class="up chevron icon"></i>
+    </button>
+    <div class="ui circular label">
+      {{page}}
+    </div>
+    <button class="circular ui icon button {{if (gte max filteredModel.length) 'disabled' 'primary'}}" onclick={{action 'next'}}>
+      <i class="down chevron icon"></i>
+    </button>
+    <button class="circular ui icon button {{if (gte max filteredModel.length) 'disabled' 'secondary'}}" onclick={{action 'last'}}>
+      <i class="angle double down icon"></i>
+    </button>
+  </div>
+{{/if}}

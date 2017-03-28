@@ -4,10 +4,5 @@ export default Ember.Service.extend({
   mapInstance: null,
   zoom: 11,
   lat: 42.3,
-  lng: -71.05,
-  actions: {
-    setMapInstance(map) {
-      console.log(map);
-    }
-  }
+  lng: -71.05
 });

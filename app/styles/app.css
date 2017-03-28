@@ -1,5 +1,22 @@
 .leaflet-container {
-  height: 480px;
+  min-height: 300px;
+  height:100%;
+}
+
+.map-ui-segment {
+  height: 100%;
+}
+
+.category-search {
+  width: 100%;
+}
+
+.viewport-vertical-height {
+  height: calc(100vh);
+}
+
+body>.ember-view {
+  height: 100%;
 }
 
 .ui-visibility-sticky {
@@ -55,9 +72,10 @@ body {
 .table-shadow {
   border-right: 20px;
   border-right-color: black;
-  height: 100%;
+  height: 102%;
   right: -20px;
   width: 20px;
+  top: -20px;
   position: absolute;
   background-color: transparent;
   z-index: 9999;

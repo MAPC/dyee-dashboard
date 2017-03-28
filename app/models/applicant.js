@@ -49,6 +49,10 @@ export default DS.Model.extend({
     return latitude && longitude;
   }),
 
+  positions: DS.hasMany('position'),
+
+  user: DS.belongsTo({ async: true }),
+
   isSelected: false,
   truncatedInterests: Ember.computed('interests', function() {
     let interests = this.get('interests');

@@ -4,4 +4,10 @@ export default function(){
     this.use('toLeft'),
     this.reverse('toRight')
   );
+
+  this.transition(
+    this.toRoute('jobs.show'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
 };

@@ -1,0 +1,27 @@
+<div class="ui top attached menu">
+  {{#link-to 'jobs' class='circular accent-color ui icon item button'}}
+    <i class="icon left chevron" style="color: white;"></i>
+  {{/link-to}}
+</div>
+<div class="ui attached segment">
+  <h2 class="ui header">
+    <div class="content">
+      {{model.job.site_name}}
+      <div class="sub header">{{model.job.category}}</div>
+    </div>
+  </h2>
+  {{model.job.duties_responsbilities}}
+  <div class="ui horizontal divider">
+    Interested?
+  </div>
+  {{#liquid-if isInterested}}
+    <div class="ui inverted green segment">
+      You've expressed interest in this job! You don't need to do anything else.
+    </div>
+  {{else}}
+    <div class="ui {{if isInterested 'green' 'blue'}} fluid button" onclick={{action 'toggleInterest'}}>
+      CLICK HERE
+    </div>
+  {{/liquid-if}}
+</div>
+{{outlet}}

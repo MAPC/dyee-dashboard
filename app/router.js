@@ -11,6 +11,9 @@ Router.map(function() {
     this.route('show', { path: '/:id' });
   });
   this.route('return-survey');
+  this.route('jobs', function() {
+    this.route('show', { path: '/:id' });
+  });
 });
 
 export default Router;
