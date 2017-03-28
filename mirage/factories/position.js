@@ -1,9 +1,35 @@
 import { Factory } from 'ember-cli-mirage';
+let lat = 42.295070;
+let lng = -71.174772;
+
+function changeLat() {
+  let newLat = (-0.01 * (Math.random())) + 42.3;
+  lat = newLat;
+}
+
+function changeLng() {
+  let newLng = (-0.01 * (Math.random())) + (-71.17);
+  lng = newLng;
+}
 
 export default Factory.extend({
   site_name() { return faker.company.companyName(); },
-  latitude() { return (-0.01 * (Math.random())) + 42.3; },
-  longitude() { return (-0.01 * (Math.random())) + (-71.17); },
+  latitude(i) { 
+    if((i) % 2 == 0) { 
+      changeLat(); 
+      return lat; 
+    } else { 
+      return lat; 
+    }
+  },
+  longitude(i) { 
+    if((i) % 2 == 0) { 
+      changeLng(); 
+      return lng; 
+    } else { 
+      return lng; 
+    }
+  },
   job_title() { return faker.name.jobTitle(); },
   description() { return faker.lorem.paragraph(); },
   positions_available() { return faker.random.number(); },
@@ -23,14 +49,9 @@ export default Factory.extend({
   category(i) {
     return faker.list.cycle(
       "Community Organizing",
-      "Admin or Office Assistant",
-      "Community Organizing",
       "Digital Media, Communications or Film",
       "Sports, Fitness and/or Recreation",
       "Admin or Office Assistant",
-      "Sports, Fitness and/or Recreation",
-      "Admin or Office Assistant",
-      "Sports, Fitness and/or Recreation"
     )(i);
   },
   afterCreate(position, server) {
@@ -39,3 +60,4 @@ export default Factory.extend({
     server.create('applicant', { positions: [position] });  
   }
 });
+

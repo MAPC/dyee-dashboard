@@ -1,6 +1,6 @@
 export default function(server) {
   server.createList('applicant', 30);
-  server.createList('position', 30);
+  server.loadFixtures('positions');
   server.createList('user', 30);
   server.createList('rehire-site', 30);
   /*
