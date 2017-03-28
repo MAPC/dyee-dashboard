@@ -84,6 +84,19 @@ body {
   box-shadow:         9px 0px 30px 9px rgba(48, 50, 50, 0.53);
 }
 
+.map-information {
+  position: absolute; 
+  width:100%; 
+  min-height: 20px; 
+  z-index:9999; 
+  bottom:0;
+}
+
+.cbo-contact-info {
+  background-color: rgba(255,255,255, 0.8);
+  pointer-events: all;
+}
+
 .dark-primary-color    { background: #0288D1 !important; }
 .default-primary-color { background: #03A9F4 !important; }
 .light-primary-color   { background: #B3E5FC !important; }
