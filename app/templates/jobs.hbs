@@ -9,6 +9,33 @@
           </div>
         </h1>
         <p>Your file says you're interested in {{model.user.applicant_interests}}.</p>
+          {{#liquid-if model.user.applicant.positions.length}}
+            <div class="ui blue inverted segment">
+              {{#ui-accordion class='inverted'}}
+                <div class="title">
+                  <i class="dropdown icon"></i>
+                  {{#if model.user.applicant.hasReachedMaxPositions}}
+                    You've expressed interest in the maximum number of positions allowed. To add another position, you must remove yourself from one other position.
+                  {{else}}
+                    You've expressed interest in <b>{{model.user.applicant.positions.length}}/10</b> positions!
+                  {{/if}}
+                </div>
+                <div class="content">
+                  <div class="ui basic segment">
+                    <div class="ui inverted ordered list">
+                      {{#each model.user.applicant.positions as |position|}}
+                        <div class="item">
+                          {{#link-to 'jobs.show' position.id}} 
+                            {{position.site_name}} {{if position.external_application_url '(Note: this position includes an external application)'}}
+                          {{/link-to}}
+                        </div>
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              {{/ui-accordion}}
+            </div>
+          {{/liquid-if}}
         {{liquid-outlet}}
       </div>
       <div class="eight wide column">

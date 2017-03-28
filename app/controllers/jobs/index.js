@@ -30,8 +30,9 @@ export default Ember.Controller.extend({
   }),
 
   source: Ember.computed('model', function() {
-    let applicants = this.get('model.jobs');
-    return applicants.map((el) => { return { title: el.get('site_name'), id: el.get('id'), description: el.get('interests') }; });
+    let positions = this.get('model.jobs');
+    console.log(positions.map((el) => { return { title: `${el.get('site_name')} (${el.get('category')})`, id: el.get('id'), description: el.get('category') }; }));
+    return positions.map((el) => { return { title: `${el.get('site_name')} (${el.get('category')})`, id: el.get('id'), description: el.get('category') }; });
   }),
 
   resource: 'jobs.show',

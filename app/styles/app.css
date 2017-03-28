@@ -47,6 +47,7 @@ body>.ember-view {
 
 body {
   background-color: #fafafa;
+  margin-bottom: 2em;
 }
 
 .ui.table {

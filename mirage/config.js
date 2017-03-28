@@ -3,6 +3,17 @@ export default function() {
 
   this.get('applicants');
   this.get('applicants/:id');
+  this.get('applicants/:id/positions', function({ applicants }, { params }) {
+    let applicant = applicants.findBy({
+      id: params.id
+    });
+
+    if (!applicant) {
+      return [];
+    }
+
+    return applicant.positions;
+  });
   this.get('rehire_sites', (schema, request) => {
     console.log(request.queryParams['filter[site_name]']);
     return schema.rehireSites.where({ 'site_name': request.queryParams['filter[site_name]'] });

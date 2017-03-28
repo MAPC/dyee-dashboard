@@ -1,7 +1,7 @@
 <div class="ui horizontal divider">
   Search Job
 </div>
-{{#ui-search class="ui search fluid category-search" searchFullText=true onSelect=(action 'linkToApplicant') source=source}}
+{{#ui-search class="ui search fluid category-search" searchFields=(array 'description' 'title') searchFullText=true onSelect=(action 'linkToApplicant') source=source}}
   <input class="prompt category-search" type="text" placeholder="Search by Name">
   <div class="results"></div>
 {{/ui-search}}

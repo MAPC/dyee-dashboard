@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import { truncateText } from '../helpers/truncate-text';
+const MAX_POSITIONS_ALLOWED = 10;
 
 export default DS.Model.extend({
   first_name: DS.attr('string'),
@@ -49,6 +50,9 @@ export default DS.Model.extend({
     return latitude && longitude;
   }),
 
+  hasReachedMaxPositions: Ember.computed('positions.[]', function() {
+    return this.get('positions.length') >= MAX_POSITIONS_ALLOWED;
+  }),
   positions: DS.hasMany('position'),
 
   user: DS.belongsTo({ async: true }),

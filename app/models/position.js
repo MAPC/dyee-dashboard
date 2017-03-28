@@ -14,8 +14,10 @@ export default DS.Model.extend({
   duties_responsbilities: DS.attr('string'),
   ideal_candidate: DS.attr('string'),
   open_positions: DS.attr('number'),
-  external_application_url: DS.attr('string'),
   applicants: DS.hasMany('applicant'),
+  hasExternalApp: Ember.computed('external_application_url', function() {
+    return !Ember.isEmpty(this.get('external_application_url'));
+  }),
   isSelected: false
 });
 
