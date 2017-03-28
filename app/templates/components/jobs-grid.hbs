@@ -1,0 +1,24 @@
+{{#liquid-bind model use=transition}}
+  <div class="ui three doubling stackable column padded link cards">
+    {{#each model as |job|}}
+      {{#link-to 'jobs.show' job.id class="link card"}}
+        <div class="content">
+          <div class="header">{{job.site_name}}</div>
+          <div class="meta">
+            <span class="category">{{job.title}}</span>
+          </div>
+          <div class="description">
+            {{truncate-text job.duties_responsbilities limit=100}}
+          </div>
+        </div>
+        <div class="extra content">
+          <div class="right floated author">
+            {{job.category}}
+          </div>
+        </div>
+      {{/link-to}}
+    {{/each}}
+  </div>
+{{/liquid-bind}}
+
+  

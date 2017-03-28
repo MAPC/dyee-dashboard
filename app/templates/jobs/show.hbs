@@ -12,7 +12,7 @@
   </h2>
   {{model.job.duties_responsbilities}}
   {{#if model.job.external_application_url}}
-    <div class="ui inverted yellow segment">
+    <div class="ui yellow segment">
       Note: This job includes a separate application. Please <a href="{{model.job.external_application_url}}" target="_blank">click here to fill it out.</a>
     </div>
   {{/if}}
@@ -20,7 +20,7 @@
     Interested?
   </div>
   {{#liquid-if isInterested}}
-    <div class="ui inverted green segment">
+    <div class="ui yellow segment">
       You've expressed interest in this job! {{if model.job.external_application_url 'Just one more thing...' 'You don\'t need to do anything else!'}}
     </div>
     {{#liquid-if model.job.external_application_url}}

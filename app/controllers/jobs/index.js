@@ -5,9 +5,8 @@ export default Ember.Controller.extend({
   fields: ['site_name', 'title', 'open_positions', 'category'],
   queryParams: ['min','max'],
   min: 0,
-  max: 8,
-  perPage: 8,
-  transition: 'toUp',
+  max: 9,
+  perPage: 9,
   selectedInterestCategories: null,
   page: Ember.computed('min','max','perPage', function() {
     let { max, perPage } = this.getProperties('max','perPage');

@@ -1,3 +1,12 @@
+div,h1,h2,h3,h4,h5,span,li,ul,p,a {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+$blue: #1A5678;
+$gray: #4E4C4A;
+$yellow: #FCF4C4;
+$white: #FFFFF7;
+
 .leaflet-container {
   min-height: 300px;
   height:100%;
@@ -12,7 +21,7 @@
 }
 
 .viewport-vertical-height {
-  height: calc(100vh);
+  height: 100%;
 }
 
 body>.ember-view {
@@ -46,7 +55,7 @@ body>.ember-view {
 }
 
 body {
-  background-color: #fafafa;
+  background-color: $white;
   margin-bottom: 2em;
 }
 
@@ -67,7 +76,7 @@ body {
 }
 
 .ui.inverted.main.menu {
-  background: #0288D1;
+  background: $blue;
 }
 
 .table-shadow {
@@ -98,11 +107,31 @@ body {
   pointer-events: all;
 }
 
-.dark-primary-color    { background: #0288D1 !important; }
+.blue {
+  background: $blue !important;
+  background-color: $blue !important;
+}
+
+.ui.blue.label {
+  background: $blue !important;
+  background-color: $blue !important;
+}
+
+.ui.inverted.blue.segment {
+  background: $blue !important;
+  background-color: $blue !important;
+}
+
+.ui.yellow.segment {
+  background: $yellow !important;
+  background-color: $yellow !important;
+}
+
+.dark-primary-color    { background: $blue !important; }
 .default-primary-color { background: #03A9F4 !important; }
 .light-primary-color   { background: #B3E5FC !important; }
 .text-primary-color    { color: #FFFFFF !important; }
-.accent-color          { background: #FF5722 !important; }
+.accent-color          { background: $blue !important; }
 .primary-text-color    { color: #212121 !important; }
 .secondary-text-color  { color: #757575 !important; }
 .divider-color         { border-color: #BDBDBD !important; }
