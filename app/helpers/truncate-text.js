@@ -5,7 +5,7 @@ export function truncateText(params, hash) {
   var len = hash.limit;
   var out = '';
 
-  if (value !== undefined) {
+  if (value !== undefined && value !==null) {
     out = value.substr(0, len);
 
     if (value.length > len) {
