@@ -1,11 +1,15 @@
 {{application-menu}}
 <div class="ui basic segment">
   <h1 class="ui header">Welcome, {{uniqSiteName}}</h1>
-  <p>You have been allotted {{totalAllotments}} positions. You may allocate 50 percent, or <strong>{{directSelectAllotments}}</strong> positions, to select directly for summer employment at your job site. Your remaining 50 percent, or <strong>{{lotteryAllotments}}</strong> positions, will be selected through the City of Boston's Summer Jobs Lottery.</p>
 
-  <p>In the list below, you can browse information about applicants who are interested in working at your site or in the same job category that you offer. You are required to review candidates here, and mark "Intend to Hire" or "I do not want to hire" by April 28th.</p>
+  <p>The Youth Summer Jobs Program has allocated you a total of {{totalAllotments}} positions. You may select 50% of your positions ({{directSelectAllotments}} youth) to work for you this summer. In May 2017, the City of Boston will select the remaining 50% of your positions ({{lotteryAllotments}} youth) through a jobs lottery.</p>
 
-  <p>This information will be used to track who you want to hire for HR purposes and to pool any remaining candidates into the lottery. Please note: You are responsible for communicating directly with youth applicants to interview or evaluate for employment.</p>
+  <p>In the list below, browse through applicants who have an interest in the positions or area of work you offer. You must review candidates and mark "Intend to Hire" or "I do not want to hire" by April 28th. Any remaining youth applicants enter into the jobs lottery.</p>
+
+  <p>Your selections create an official record of who you want to hire. It is mandatory to select applicants by April 28th to complete legal and HR requirements for employing youth.</p>
+
+  <p>Note: The City of Boston will not be contacting any youth on your behalf. You are responsible for contacting youth and evaluating them for your programs.</p>
+
   {{#liquid-if requisitionsToHire}}
     <div class="ui yellow segment">
       {{#ui-accordion}}

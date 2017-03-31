@@ -4,6 +4,7 @@ import computed from 'ember-computed-decorators';
 const ALLOCATION_RULE = 2;
 
 export default Ember.Controller.extend({
+  queryParams: ['email','token'],
   mapState: Ember.inject.service(),
   fields: [ 'applicant.first_name',
             'applicant.last_name',
@@ -28,7 +29,6 @@ export default Ember.Controller.extend({
   uniqSiteName: Ember.computed('model.user', function() {
     return this.get('model.user.positions').uniqBy('site_name').get('firstObject.site_name');
   }),
-  // allotments: sum('model.user.positions'),
   totalAllotments: array.reduce('model.user.positions', (int, cur, i) => {
     return int + Math.floor(cur.get('open_positions')/ALLOCATION_RULE);
   }, 0), 
