@@ -6,6 +6,7 @@ module.exports = function(environment) {
     typekit: {
       kitId: 'rsf1xqd',
     },
+    locationType: 'router-scroll',
     modulePrefix: 'dyee-summer-dashboard',
     environment: environment,
     rootURL: '/',
