@@ -15,15 +15,8 @@ export default Ember.Route.extend({
             return flatten(collection);
           });
         });
-      })
+      }),
+      applicants: this.store.findAll('applicant')
     })
   }
 });
-
-// applicants: this.store.query('user', { email: params.email }).then((user) => {
-//   return user.get('firstObject.positions').then((positions)=>{
-//     return RSVP.all(positions.mapBy('applicants')).then(collection=> {
-//       return flatten(collection);
-//     });
-//   });
-// })

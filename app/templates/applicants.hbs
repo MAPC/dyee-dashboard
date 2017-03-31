@@ -1,16 +1,7 @@
 {{application-menu}}
-<div class="ui basic segment">
-  <h1 class="ui header">Welcome, {{uniqSiteName}}</h1>
-
-  <p>The Youth Summer Jobs Program has allocated you a total of {{totalAllotments}} positions. You may select 50% of your positions ({{directSelectAllotments}} youth) to work for you this summer. In May 2017, the City of Boston will select the remaining 50% of your positions ({{lotteryAllotments}} youth) through a jobs lottery.</p>
-
-  <p>In the list below, browse through applicants who have an interest in the positions or area of work you offer. You must review candidates and mark "Intend to Hire" or "I do not want to hire" by April 28th. Any remaining youth applicants enter into the jobs lottery.</p>
-
-  <p>Your selections create an official record of who you want to hire. It is mandatory to select applicants by April 28th to complete legal and HR requirements for employing youth.</p>
-
-  <p>Note: The City of Boston will not be contacting any youth on your behalf. You are responsible for contacting youth and evaluating them for your programs.</p>
-
-  {{#liquid-if requisitionsToHire}}
+<br/>
+{{#liquid-if requisitionsToHire}}
+  <div class='ui basic segment'>
     <div class="ui yellow segment">
       {{#ui-accordion}}
         <div class="title">
@@ -32,18 +23,44 @@
         </div>
       {{/ui-accordion}}
     </div>
-    <br/>
-  {{/liquid-if}}
+  </div>
+{{/liquid-if}}
+<div class="ui basic segment">
   <div class="ui grid stackable">
     <div class="ten wide column" style="padding-right:0px;">
-      {{ui-table fields=fields
-                  model=model.requisitions
+      <h1 class="ui header">Welcome, {{uniqSiteName}}</h1>
+
+      <p>The Youth Summer Jobs Program has allocated you a total of {{totalAllotments}} positions. You may select 50% of your positions ({{directSelectAllotments}} youth) to work for you this summer. In May 2017, the City of Boston will select the remaining 50% of your positions ({{lotteryAllotments}} youth) through a jobs lottery.</p>
+
+      <p>In the list below, browse through applicants who have an interest in the positions or area of work you offer. You must review candidates and mark "Intend to Hire" or "I do not want to hire" by April 28th. Any remaining youth applicants enter into the jobs lottery.</p>
+
+      <p>Your selections create an official record of who you want to hire. <b>It is mandatory to select applicants by April 28th to complete legal and HR requirements for employing youth.</b></p>
+
+      <p><em>Note: The City of Boston will not be contacting any youth on your behalf. You are responsible for contacting youth and evaluating them for your programs.</em></p>
+
+      {{#if model.requisitions.length}}
+        <div class="ui header">
+          Teen applicants who are interested in your jobs:
+        </div>
+        {{ui-table fields=fields
+                    model=model.requisitions
+                    class='scrollable'
+                    transition=transition}}
+      {{/if}}
+      <div class="ui header">
+        Teens who may be interested:
+        {{map-by 'category' model.user.positions}}
+      </div>
+      {{ui-table fields=applicants_fields
+                  model=filteredApplicants
                   class='scrollable'
                   transition=transition
-                  resource=resource}}
+                  resource='applicants.show-applicant'}}
     </div>
     <div class="six wide column">
-      {{liquid-outlet}}
+      {{#ui-sticky}} 
+        {{liquid-outlet}}
+      {{/ui-sticky}}
     </div>
   </div>
 </div>

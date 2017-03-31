@@ -13,7 +13,17 @@ export default Factory.extend({
   updated_at: faker.date.recent,
   lottery_number() { return faker.random.number({min:100}); },
   interests(i) {
-    return ["Athletic Assistant"];
+    return faker.list.cycle(
+      ["Community Organizing"],
+      ["Admin or Office Assistant","Business or Entrepreneurship","Child Care or Teacher's Assistant","Community Organizing","Engineering and/or Math","Hospitality & Tourism"],
+      ["Community Organizing","Peer Leadership","Sports, Fitness and/or Recreation"],
+      ["Digital Media, Communications or Film","Education or Tutoring","Engineering and/or Math","Environment, Natural Resources, and/or Agriculture"],
+      ["Sports, Fitness and/or Recreation"],
+      ["Admin or Office Assistant","Child Care or Teacher's Assistant","Health Care","Peer Leadership","Science","Veterinary or Marine Science","Visual or Performing Arts"],
+      ["Sports, Fitness and/or Recreation"],
+      ["Admin or Office Assistant","Sports, Fitness and/or Recreation"],
+      ["Spaceships"]
+    )(i);
   },
   age() { return faker.random.number({min:12, max:18}); },
   position_location() { return faker.company.companyName(); },

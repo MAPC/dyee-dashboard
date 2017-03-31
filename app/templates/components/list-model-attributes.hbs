@@ -7,7 +7,6 @@
           {{#if (eq (attribute-type value) 'boolean')}}
             <i class="{{if value 'green checkmark' 'red remove'}} circle icon"></i>
           {{else}}
-            {{value}}
             {{get model key}}
           {{/if}}
         </div>

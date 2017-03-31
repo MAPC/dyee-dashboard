@@ -14,36 +14,28 @@
   Job Results
 </div>
 {{#if filteredModel.length}}
+  {{#if (gt model.jobs.length 20)}}
+    <div class="ui basic segment center aligned">
+      <button class="circular ui icon button {{if min 'secondary' 'disabled'}}" onclick={{if min (action 'first')}}>
+        <i class="angle double up icon"></i>
+      </button>
+      <button class="circular ui icon button {{if min 'primary' 'disabled'}}" onclick={{if min (action 'previous')}}>
+        <i class="up chevron icon"></i>
+      </button>
+      <div class="ui circular label">
+        {{page}}
+      </div>
+      <button class="circular ui icon button {{if (gte max filteredModel.length) 'disabled' 'primary'}}" onclick={{action 'next'}}>
+        <i class="down chevron icon"></i>
+      </button>
+      <button class="circular ui icon button {{if (gte max filteredModel.length) 'disabled' 'secondary'}}" onclick={{action 'last'}}>
+        <i class="angle double down icon"></i>
+      </button>
+    </div>
+  {{/if}}
   {{jobs-grid model=sortedModel}}
-{{!--     {{#ui-table fields=fields
-              model=sortedModel
-              class='scrollable'
-              transition=transition
-              resource=resource}}
-              <div class="table-shadow"></div>
-  {{/ui-table}} --}}
 {{else}}
   <h3 class="ui center aligned disabled header">
     No Results - Select the categories above for more options
   </h3>
-{{/if}}
-
-{{#if (gt model.jobs.length 20)}}
-  <div class="ui basic segment center aligned">
-    <button class="circular ui icon button {{if min 'secondary' 'disabled'}}" onclick={{if min (action 'first')}}>
-      <i class="angle double up icon"></i>
-    </button>
-    <button class="circular ui icon button {{if min 'primary' 'disabled'}}" onclick={{if min (action 'previous')}}>
-      <i class="up chevron icon"></i>
-    </button>
-    <div class="ui circular label">
-      {{page}}
-    </div>
-    <button class="circular ui icon button {{if (gte max filteredModel.length) 'disabled' 'primary'}}" onclick={{action 'next'}}>
-      <i class="down chevron icon"></i>
-    </button>
-    <button class="circular ui icon button {{if (gte max filteredModel.length) 'disabled' 'secondary'}}" onclick={{action 'last'}}>
-      <i class="angle double down icon"></i>
-    </button>
-  </div>
 {{/if}}

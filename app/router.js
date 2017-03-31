@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('applicants', { path: '/applicants' }, function() {
     this.route('show', { path: '/:id' });
+    this.route('show-applicant', { path: 'profile/:applicant_id' });
   });
   this.route('return-survey');
   this.route('jobs', function() {

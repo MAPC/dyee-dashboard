@@ -131,6 +131,10 @@ body {
   z-index: 9999 !important;
 }
 
+.demo-container {
+  margin-top: 0.8em;
+}
+
 .dark-primary-color    { background: $blue !important; }
 .default-primary-color { background: #03A9F4 !important; }
 .light-primary-color   { background: #B3E5FC !important; }

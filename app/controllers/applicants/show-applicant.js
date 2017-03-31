@@ -14,14 +14,9 @@ export default Ember.Controller.extend({
     'address',
     'home_phone'
   ],
-  uniqInterests: Ember.computed('model.applicant.interests', function() {
-    return this.get('model.applicant.interests').uniq().sort();
-  }),
   actions: {
-    changeStatus(status) {
-      let model = this.get('model');
-      model.setProperties({status});
-      model.save();
+    changeStatus() {
+      
     }
   }
 });
