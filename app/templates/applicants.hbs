@@ -1,34 +1,45 @@
 {{application-menu}}
-{{#ember-wormhole to='search-box'}}
-  {{#ui-search class="ui search fluid" searchFullText=true onSelect=(action 'linkToApplicant') source=source}}
-    <input class="prompt" type="text" placeholder="Search by Name">
-    <div class="results"></div>
-  {{/ui-search}}
-{{/ember-wormhole}}
-<div style="margin-top: 40px;">
-  <div class="ui container">
-    <div class="ui grid stackable">
-      <div class="ten wide column" style="padding-right:0px;">
-        {{liquid-outlet}}
-      </div>
-      <div class="six wide column" style="padding-left: 0; border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
-        <div class="ui segment" style="padding: 0; height:100%;">
-          {{#leaflet-map onLoad=(action 'setMapInstance') zoom=mapState.zoom lat=mapState.lat lng=mapState.lng}}
-            {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-            {{#each model as |applicant|}}
-              {{circle-marker-layer fillColor=(if applicant.isSelected '#FF5722' '#03A9F4') 
-                                    stroke=0
-                                    fillOpacity=0.9
-                                    radius=(if applicant.isSelected '8' '4') 
-                                    lat=applicant.latitude 
-                                    lng=applicant.longitude 
-                                    onClick=(action 'linkTo' applicant)}}
-            {{/each}}
-          {{/leaflet-map}}
-          <div id="pagination">
+<div class="ui basic segment">
+  <h1 class="ui header">Welcome, {{uniqSiteName}}</h1>
+  <p>You have been allotted <strong>{{directSelectAllotments}}</strong> positions to select directly for summer employment at your job site. Your remaining <strong>{{lotteryAllotments}}</strong> positions will be selected through the City of Boston's Summer Jobs Lottery.</p>
+
+  <p>In the list below, you can browse information about applicants who are interested in working at your site or in the same job category that you offer. You are required to review candidates here, and mark "Intend to Hire" or "I do not want to hire" by April 28th.</p>
+
+  <p>This information will be used to track who you want to hire for HR purposes and to pool any remaining candidates into the lottery. Please note: You are responsible for communicating directly with youth applicants to interview or evaluate for employment.</p>
+  {{#liquid-if requisitionsToHire}}
+    <div class="ui yellow segment">
+      {{#ui-accordion}}
+        <div class="title">
+          <i class="dropdown icon"></i>
+            You've said you will hire <b>{{requisitionsToHire.length}}/{{directSelectAllotments}}</b> people.
+        </div>
+        <div class="content">
+          <div class="ui basic segment">
+            <div class="ui ordered list">
+              {{#each requisitionsToHire as |person|}}
+                <div class="item">
+                  {{#link-to 'applicants.show' person.id}} 
+                    {{person.applicant.last_name}}, {{person.applicant.first_name}} as {{person.position.title}} at {{person.position.site_name}}
+                  {{/link-to}}
+                </div>
+              {{/each}}
+            </div>
           </div>
         </div>
-      </div>
+      {{/ui-accordion}}
+    </div>
+    <br/>
+  {{/liquid-if}}
+  <div class="ui grid stackable">
+    <div class="ten wide column" style="padding-right:0px;">
+      {{ui-table fields=fields
+                  model=model.requisitions
+                  class='scrollable'
+                  transition=transition
+                  resource=resource}}
+    </div>
+    <div class="six wide column">
+      {{liquid-outlet}}
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@ export default Ember.Mixin.create({
   modelName: Ember.computed(function() { return this.routeName; }),
   hashProperty: null,
   afterModel() { 
-    let applicants = this.modelFor(this.get('modelName'));
+    let applicants = this.modelFor(this.get('modelName')) || [];
     let mapState = this.get('mapState');
 
     if(this.get('hashProperty')) {
@@ -18,8 +18,6 @@ export default Ember.Mixin.create({
         return L.latLng([applicant.get('latitude'), applicant.get('longitude')]); 
       }
     );
-
-
 
     let bounds = L.latLngBounds(LatLngs);
     console.log(bounds);

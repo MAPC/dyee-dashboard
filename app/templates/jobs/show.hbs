@@ -11,6 +11,12 @@
     </div>
   </h2>
   {{model.job.duties_responsbilities}}
+  {{#if model.ideal_candidate}}
+    <div class="ui header">
+      Ideal Candidate
+    </div>
+    {{model.ideal_candidate}}
+  {{/if}}
   {{#if model.job.external_application_url}}
     <div class="ui yellow segment">
       Note: This job includes a separate application. Please <a href="{{model.job.external_application_url}}" target="_blank">click here to fill it out.</a>
@@ -52,6 +58,7 @@
       <div class="item">Primary Contact Person: {{model.job.primary_contact_person}} ({{model.job.primary_contact_person_title}})</div>
       <div class="item">Contact Phone: {{model.job.primary_contact_person_phone}}</div>
       <div class="item">Site Phone: {{model.job.site_phone}}</div>
+      <div class="item">Site Phone: {{model.job.address}}</div>
     </div>
   </div>
 {{/ember-wormhole}}

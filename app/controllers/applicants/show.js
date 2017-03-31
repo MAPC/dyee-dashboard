@@ -22,7 +22,14 @@ export default Ember.Controller.extend({
     'home_phone',
     'workflow_id'
   ],
-  uniqInterests: Ember.computed('model.interests', function() {
-    return this.get('model.interests').uniq().sort();
-  })
+  uniqInterests: Ember.computed('model.applicant.interests', function() {
+    return this.get('model.applicant.interests').uniq().sort();
+  }),
+  actions: {
+    changeStatus(status) {
+      let model = this.get('model');
+      model.setProperties({status});
+      model.save();
+    }
+  }
 });

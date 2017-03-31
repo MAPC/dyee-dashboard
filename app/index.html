@@ -19,7 +19,19 @@
     <script src="https://cob-header.herokuapp.com/header.js" async=true></script>
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/dyee-summer-dashboard.js"></script>
+    <script src="/js/le.min.js"></script>
+<!--     <script>
+      // This needs to be an initializer 
+      LE.init('0d780bb9-75a3-491d-b0e0-85f43b90006c');
+      window.onerror = logError;
+      if(typeof Logger !== 'undefined') { Logger.error = logError; }
+      Ember.onerror = logError;
+      // RSVP.on('error', logError);
 
+      function logError(error) {
+        LE.log(error);
+      }
+    </script> -->
     {{content-for "body-footer"}}
   </body>
 </html>

@@ -3,6 +3,9 @@
 module.exports = function(environment) {
   var deployTarget = process.env.DEPLOY_TARGET;
   var ENV = {
+    typekit: {
+      kitId: 'rsf1xqd',
+    },
     modulePrefix: 'dyee-summer-dashboard',
     environment: environment,
     rootURL: '/',
@@ -24,6 +27,30 @@ module.exports = function(environment) {
     },
     googleFonts: [
       'Source+Sans+Pro'
+    ],
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self' www.google-analytics.com",
+      'font-src': "'self'",
+      'connect-src': "'self' www.google-analytics.com",
+      'img-src': "'self'",
+      'style-src': "'self'",
+      'media-src': "'self'"
+    },
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        environments: ['development', 'production'],
+        config: {
+          id: 'UA-5547782-29',
+          // Use `analytics_debug.js` in development
+          debug: environment === 'development',
+          // Use verbose tracing of GA events
+          trace: environment === 'development',
+          // Ensure development env hits aren't sent to GA
+          sendHitTask: environment !== 'development'
+        }
+      }
     ]
   };
 

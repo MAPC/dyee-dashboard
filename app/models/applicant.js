@@ -45,6 +45,14 @@ export default DS.Model.extend({
   home_phone: DS.attr('string'), 
   workflow_id: DS.attr('string'),
   receive_text_messages: DS.attr('boolean'),
+  is_returning: DS.attr('boolean'),
+  isReturning: Ember.computed('is_returning', function() {
+    if(this.get('is_returning')) {
+      return "Yes";
+    } else {
+      return "No";
+    }
+  }),
   hasGeom: Ember.computed('latitude', 'longitude', function() {
     let { latitude, longitude } = this.getProperties('latitude', 'longitude')
     return latitude && longitude;
