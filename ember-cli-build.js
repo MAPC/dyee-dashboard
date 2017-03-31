@@ -4,7 +4,10 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-  // Add options here
+    babel: {
+      optional: ['es7.decorators']
+    },
+    // Add options here
     fingerprint: {
       exclude: [
         'images/layers-2x.png',

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { flatten } from '../../helpers/flatten';
+import computed from 'ember-computed-decorators';
 
 export default Ember.Controller.extend({
   fields: ['site_name', 'title', 'open_positions', 'category'],
@@ -8,31 +9,28 @@ export default Ember.Controller.extend({
   max: 9,
   perPage: 9,
   selectedInterestCategories: null,
-  page: Ember.computed('min','max','perPage', function() {
-    let { max, perPage } = this.getProperties('max','perPage');
-    return Math.round(max/perPage);
-  }),
-  interestCategories: Ember.computed('model', function() {
-    let jobs = this.get('model.jobs');
-    return flatten(jobs.mapBy('category')).uniq();
-  }),
-  filteredModel: Ember.computed('model', 'selectedInterestCategories.[]', function() {
-    let { selectedInterestCategories, model } = this.getProperties('selectedInterestCategories', 'model');
 
+  @computed('min','max','perPage')
+  page(min,max,perPage) {
+    return Math.round(max/perPage);
+  },
+
+  @computed('model.jobs')
+  interestCategories(jobs) {
+    return flatten(jobs.mapBy('category')).uniq();
+  },
+
+  @computed('model', 'selectedInterestCategories.[]')
+  filteredModel(model,selectedInterestCategories) {
     return model.jobs.filter((el) => {
       return selectedInterestCategories.includes(el.get('category'));
     });
-  }),
-  sortedModel: Ember.computed('filteredModel','min','max','perPage', function() {
-    let { filteredModel, min, max, perPage } = this.getProperties('filteredModel', 'min', 'max', 'perPage');
-    return filteredModel.sortBy('site_name').slice(min,max);
-  }),
+  },
 
-  source: Ember.computed('model', function() {
-    let positions = this.get('model.jobs');
-    console.log(positions.map((el) => { return { title: `${el.get('site_name')} (${el.get('category')})`, id: el.get('id'), description: el.get('category') }; }));
-    return positions.map((el) => { return { title: `${el.get('site_name')} (${el.get('category')})`, id: el.get('id'), description: el.get('category') }; });
-  }),
+  @computed('filteredModel','min','max','perPage')
+  sortedModel(filteredModel,min,max) {
+    return filteredModel.sortBy('site_name').slice(min,max);
+  },
 
   resource: 'jobs.show',
   actions: {
@@ -68,29 +66,6 @@ export default Ember.Controller.extend({
     removeInterest(interest) {
       this.send('first');
       this.get('selectedInterestCategories').removeObject(interest);
-    },
-    linkToApplicant(job) {
-      this.transitionToRoute('jobs.show', job.id);
     }
   }
 });
-
-function intersect_safe(a, b)
-{
-  var ai=0, bi=0;
-  var result = [];
-
-  while( ai < a.length && bi < b.length )
-  {
-     if      (a[ai] < b[bi] ){ ai++; }
-     else if (a[ai] > b[bi] ){ bi++; }
-     else /* they're equal */
-     {
-       result.push(a[ai]);
-       ai++;
-       bi++;
-     }
-  }
-
-  return result;
-}

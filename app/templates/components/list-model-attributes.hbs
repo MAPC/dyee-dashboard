@@ -1,7 +1,6 @@
 <div class="ui divided list">
   {{#each-in items as |key value|}}
-    {{log key value}}
-    {{#if (is-not-empty value)}}
+    {{#if (is-not-empty (get model key))}}
       <div class="item">
         <strong>{{prettify-camel-case key}}</strong>
         <div class="right floated content">
@@ -9,6 +8,7 @@
             <i class="{{if value 'green checkmark' 'red remove'}} circle icon"></i>
           {{else}}
             {{value}}
+            {{get model key}}
           {{/if}}
         </div>
       </div>

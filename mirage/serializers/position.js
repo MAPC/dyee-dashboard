@@ -5,6 +5,9 @@ export default JSONAPISerializer.extend({
     return {
       'applicants': {
         related: `/api/positions/${position.id}/applicants`
+      },
+      'requisitions': {
+        related: `/api/positions/${position.id}/requisitions`
       }
     };
   },

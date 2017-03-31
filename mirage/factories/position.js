@@ -30,9 +30,14 @@ export default Factory.extend({
       return lng; 
     }
   },
-  job_title() { return faker.name.jobTitle(); },
+  title() { return faker.name.jobTitle(); },
   description() { return faker.lorem.paragraph(); },
-  positions_available() { return faker.random.number(); },
+  open_positions() { return faker.random.number(
+                      {
+                        'min': 3,
+                        'max': 50
+                      }); 
+  },
   interests(i) {
     return faker.list.cycle(
       ["Community Organizing"],
@@ -57,7 +62,8 @@ export default Factory.extend({
   afterCreate(position, server) {
     server.create('applicant', { positions: [position] });
     server.create('applicant', { positions: [position] });  
-    server.create('applicant', { positions: [position] });  
+    server.create('requisition', { position: position, applicant: server.create('applicant') });
+    server.create('requisition', { position: position, applicant: server.create('applicant') });
   }
 });
 

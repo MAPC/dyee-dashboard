@@ -1,23 +1,21 @@
 {{yield}}
 <table class="ui unstackable single line selectable compact table">
-  {{#liquid-bind model use=transition}}
-    <thead>
-      <tr>
-        {{#each fields as |field|}}
-          <th>{{prettify-camel-case field}}</th>
-        {{/each}}
-      </tr>
-    </thead>
-    <tbody>
-      {{#each model as |item|}}
-        {{#link-to (or resource 'applicants.show') item.id tagName='tr' class='is-clickable'}}
-          {{#each fields as |field|}}
-            <td>
-              {{get item field}}
-            </td>
-          {{/each}}
-        {{/link-to}}
+  <thead>
+    <tr>
+      {{#each fields as |field|}}
+        <th>{{prettify-camel-case field}}</th>
       {{/each}}
-    </tbody>
-  {{/liquid-bind}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |item|}}
+      {{#link-to (or resource 'applicants.show') item.id tagName='tr' class='is-clickable'}}
+        {{#each fields as |field|}}
+          <td>
+            {{get item field}}
+          </td>
+        {{/each}}
+      {{/link-to}}
+    {{/each}}
+  </tbody>
 </table>

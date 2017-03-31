@@ -1,7 +1,7 @@
 export default function(server) {
   server.createList('applicant', 30);
   server.loadFixtures('positions');
-  server.createList('user', 40);
+  server.createList('user', 2);
   server.createList('rehire-site', 30);
   /*
     Seed your development database using your factories.
