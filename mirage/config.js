@@ -16,6 +16,9 @@ export default function() {
     return applicant.positions;
   });
 
+  this.post('picks');
+  this.patch('picks/:id');  
+
   this.get('positions/:id/applicants', function({ positions }, { params }) {
     let position = positions.findBy({
       id: params.id
