@@ -27,7 +27,22 @@ export default Ember.Controller.extend({
     }
   },
 
-  @computed('model.applicants', 'model.user.positions')
+  // @computed('model.user.positions.@each.picks')
+  // userPicks(user_positions) {
+  //   return user_positions.mapBy('picks');
+  // },
+
+  @computed('model.applicants', 'model.picks', 'model.user.positions.@each.picks')
+  applicantsSelected(applicants, userPicks) {
+    let ids = userPicks.mapBy('applicant.id');
+    console.log(ids);
+    return applicants.forEach((applicant) => {
+      applicant.set('isPicked', ids.includes(applicant.get('id')));
+      console.log(applicant.get('isPicked'));
+    });
+  },
+
+  @computed('applicantsSelected', 'model.user.positions')
   filteredApplicants(applicants, user_positions) {
     return applicants.filter(applicant=> {
       return user_positions.mapBy('category').some(category=>{
@@ -35,6 +50,7 @@ export default Ember.Controller.extend({
       });
     })
   },
+
   requisitionsToHire: Ember.computed('model.requisitions.@each.status', function() {
     return this.get('model.requisitions').filterBy('status', 'hire');
   }),

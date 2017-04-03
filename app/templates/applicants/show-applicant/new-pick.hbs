@@ -1,0 +1,29 @@
+{{#ember-wormhole to='new-pick-modal'}}
+  <div class="ui active page dimmer">
+    <div class="content">
+      <div class="center">
+        <div class="ui container connector-form" style="color: black;">
+          <h2 class="ui top attached header">
+            Pick which position for {{model.applicant.first_name}}?
+          </h2>
+          <div class="ui attached center aligned segment" style="color: black;">
+            <div style="max-height: 300px; overflow-y: scroll;">
+              <div class="ui middle aligned selection list">
+                {{#each model.positions as |position|}}
+                  <div class="item {{if (eq model.pick.position.id position.id) 'inverted blue'}}" onclick={{route-action 'associatePosition' model position}}>
+                      {{position.title}}
+                      {{#if (and model.pick.isSaving  
+                            (eq model.pick.position.id position.id))}}
+                        <i class="spinner loading icon"></i>
+                      {{/if}}
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/ember-wormhole}}
+{{outlet}}

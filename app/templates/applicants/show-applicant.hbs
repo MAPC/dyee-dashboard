@@ -5,12 +5,15 @@
       {{#link-to 'applicants' class='circular accent-color ui icon item button'}}
         <i class="icon right chevron" style="color: white;"></i>
       {{/link-to}}
-{{!--       <div class="ui right menu">
-        {{ui-radio name="do_not_hire" class="accent-color item" label="Do not hire this person" value="do_not_hire" current=currentModel.status onChange=(action 'changeStatus')}}
-        {{ui-radio name="hire" class="accent-color item" label="I intend to hire this person" value="hire" current=currentModel.status onChange=(action 'changeStatus')}}
-      </div> --}}
+      <div class="ui right menu">
+        <div class="item">
+          {{#link-to 'applicants.show-applicant.new-pick' tagName='div' class='ui button accent-color'}}
+            <i class="icon star" style="color: white;"></i> Pick This Applicant
+          {{/link-to}}
+        </div>
+      </div>
     </div>
-    <div class="ui attached segment">
+    <div class="ui attached segment" style="height:800px; overflow-y: scroll">
       <h2 class="ui header">
         <div class="content">
           {{currentModel.first_name}} {{currentModel.last_name}}

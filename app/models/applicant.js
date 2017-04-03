@@ -62,6 +62,7 @@ export default DS.Model.extend({
     return this.get('positions.length') >= MAX_POSITIONS_ALLOWED;
   }),
   positions: DS.hasMany('position'),
+  picks: DS.hasMany('pick'),
 
   user: DS.belongsTo({ async: true }),
 

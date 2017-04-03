@@ -135,11 +135,15 @@ body {
   margin-top: 0.8em;
 }
 
+.inverted {
+  color: white !important;
+}
+
 .dark-primary-color    { background: $blue !important; }
 .default-primary-color { background: #03A9F4 !important; }
 .light-primary-color   { background: #B3E5FC !important; }
 .text-primary-color    { color: #FFFFFF !important; }
-.accent-color          { background: $blue !important; }
+.accent-color          { background: $blue !important; color: white !important; }
 .primary-text-color    { color: #212121 !important; }
 .secondary-text-color  { color: #757575 !important; }
 .divider-color         { border-color: #BDBDBD !important; }

@@ -17,6 +17,7 @@ export default function() {
   });
 
   this.post('picks');
+  this.get('picks/:id');  
   this.patch('picks/:id');  
 
   this.get('positions/:id/applicants', function({ positions }, { params }) {
@@ -41,6 +42,18 @@ export default function() {
     }
 
     return position.requisitions;
+  });
+
+  this.get('positions/:id/picks', function({ positions }, { params }) {
+    let position = positions.findBy({
+      id: params.id
+    });
+
+    if (!position) {
+      return [];
+    }
+
+    return position.picks;
   });
 
   this.patch('requisitions/:id');

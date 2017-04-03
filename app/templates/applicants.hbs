@@ -25,18 +25,20 @@
     </div>
   </div>
 {{/liquid-if}}
+<div id="new-pick-modal">
+</div>
 <div class="ui basic segment">
   <div class="ui grid stackable">
     <div class="ten wide column" style="padding-right:0px;">
       <h1 class="ui header">Welcome, {{uniqSiteName}}</h1>
 
-      <p>The BCYF Youth Summer Jobs Program has allocated you a total of {{totalAllotments}} positions. You may select 50% of your positions ({{directSelectAllotments}} youth) to work for you this summer. In May 2017, the City of Boston will select the remaining half of your positions ({{lotteryAllotments}} youth) through a jobs lottery.</p>
+      <p>The BCYF Youth Engagement and Employment Summer Jobs Program has allocated you a total of {{totalAllotments}} positions. You may select 50% of your positions ({{directSelectAllotments}} youth) to work for you this summer. In May 2017, the BCYF will select the remaining half of your positions ({{lotteryAllotments}} youth) through a jobs lottery.</p>
 
       <p>In the list below, browse through applicants who have an interest in the position or area of work you offer. Starting April 5th, you may review candidates and mark "Intend to Hire" or "I do not want to hire." Any remaining youth applicants enter into the jobs lottery.</p>
 
       <p>Please add your choices beginning April 5th and no later than April 28th. Your selections create an official record of who you want to hire. <b>It is mandatory to select applicants by April 28th to complete legal and HR requirements for employing youth.</b></p>
 
-      <p><em>Note: The City of Boston will not be contacting any youth on your behalf. You are responsible for contacting youth and evaluating them for your programs.</em></p>
+      <p><em>Note: The City of Boston's Division of Youth Engagement and Employment will not be contacting any youth on your behalf. You are responsible for contacting youth and evaluating them for your programs.</em></p>
 
       {{#if model.requisitions.length}}
         <div class="ui header">
