@@ -2,7 +2,7 @@ import Ember from 'ember';
 import RSVP from 'rsvp';
 import CenterMapOnGeometry from '../../mixins/center-map-on-geometry';
 import RouterScroll from 'ember-router-scroll';
-import trackPage from '../mixins/track-page';
+import trackPage from '../../mixins/track-page';
 
 export default Ember.Route.extend(trackPage, RouterScroll, CenterMapOnGeometry.reopen({ hashProperty: 'job' }), {
   mapState: Ember.inject.service(),

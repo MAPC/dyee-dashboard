@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import { array, math, divide } from 'ember-awesome-macros';
 import computed from 'ember-computed-decorators';
+import { flatten } from '../helpers/flatten';
 const ALLOCATION_RULE = 2;
 
 export default Ember.Controller.extend({
-  queryParams: ['email','token'],
   mapState: Ember.inject.service(),
   fields: [ 'applicant.last_name',
             'applicant.first_name',
@@ -16,33 +16,7 @@ export default Ember.Controller.extend({
                         'mobile_phone' ],
   transition: 'toUp',
 
-  @computed('model')
-  source(applicants) {
-    if (Ember.isArray(applicants)) {
-      return applicants.map((el) => { 
-        return {  title: el.get('full_name'), 
-                  id: el.get('id'), 
-                  description: `ICIMS ID: ${el.get('icims_id')}` }; 
-      });
-    }
-  },
-
-  // @computed('model.user.positions.@each.picks')
-  // userPicks(user_positions) {
-  //   return user_positions.mapBy('picks');
-  // },
-
-  @computed('model.applicants', 'model.picks', 'model.user.positions.@each.picks')
-  applicantsSelected(applicants, userPicks) {
-    let ids = userPicks.mapBy('applicant.id');
-    console.log(ids);
-    return applicants.forEach((applicant) => {
-      applicant.set('isPicked', ids.includes(applicant.get('id')));
-      console.log(applicant.get('isPicked'));
-    });
-  },
-
-  @computed('applicantsSelected', 'model.user.positions')
+  @computed('model.applicants', 'model.user.positions')
   filteredApplicants(applicants, user_positions) {
     return applicants.filter(applicant=> {
       return user_positions.mapBy('category').some(category=>{

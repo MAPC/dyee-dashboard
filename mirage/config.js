@@ -74,7 +74,9 @@ export default function() {
   this.get('positions');
   this.get('positions/:id');
   this.get('users/:id');
-  this.get('users');
+  this.get('users', (schema, request) => {
+    return schema.users.where({ id: 1 });
+  });
   this.patch('rehire_sites/:id');
   this.patch('positions/:id');
   this.patch('applicants/:id');

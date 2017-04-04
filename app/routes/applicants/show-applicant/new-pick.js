@@ -4,7 +4,6 @@ import RSVP from 'rsvp';
 export default Ember.Route.extend({
   model(params) {
     let applicant = this.modelFor('applicants.show-applicant');
-    console.log(applicant.get('id'));
     return RSVP.hash({
       pick: this.store.createRecord('pick', { applicant }),
       applicant,
