@@ -13,7 +13,9 @@ export default Ember.Route.extend({
   actions: {
     associatePosition(model, position) {
       model.pick.setProperties({position});
-      model.pick.save();
+      model.pick.save().then(pick=> {
+        this.transitionTo('applicants.show-applicant', model.applicant.get('id'));
+      });
     }
   }
 });
