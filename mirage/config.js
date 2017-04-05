@@ -1,9 +1,14 @@
 export default function() {
   this.namespace = '/api';
 
+  this.get('users', (schema, request) => {
+    return schema.users.where({ id: 1 });
+  });
+  this.get('users/:id');
+
   this.get('applicants');
   this.get('applicants/:id');
-  this.get('requisitions/:id');
+  this.patch('applicants/:id');
   this.get('applicants/:id/positions', function({ applicants }, { params }) {
     let applicant = applicants.findBy({
       id: params.id
@@ -58,13 +63,8 @@ export default function() {
     return position.picks;
   });
 
+  this.get('requisitions/:id');
   this.patch('requisitions/:id');
-
-  this.get('positions/owned', function(schema, request) {
-    console.log(schema,request);
-    let user = schema.users.findBy({ id: 1 });
-    return user.positions;
-  });
 
   this.get('rehire_sites', (schema, request) => {
     console.log(request.queryParams['filter[site_name]']);
@@ -75,13 +75,10 @@ export default function() {
   });
   this.get('positions');
   this.get('positions/:id');
-  this.get('users/:id');
-  this.get('users', (schema, request) => {
-    return schema.users.where({ id: 1 });
-  });
+
   this.patch('rehire_sites/:id');
   this.patch('positions/:id');
-  this.patch('applicants/:id');
+  
 
   this.get('positions/:id/applicants', function({ positions }, { params }) {
     let job = positions.findBy({

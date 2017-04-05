@@ -8,7 +8,11 @@
     <div class="ten wide column" style="padding-right:0px;">
       <h1 class="ui header">Welcome, {{uniqSiteName}}</h1>
 
-      <p>The BCYF Youth Engagement and Employment Summer Jobs Program has allocated you a total of {{totalAllotments}} positions. You may select 50% of your positions ({{directSelectAllotments}} youth) to work for you this summer. In May 2017, the BCYF will select the remaining half of your positions ({{lotteryAllotments}} youth) through a jobs lottery.</p>
+      <p>The BCYF Youth Engagement and Employment Summer Jobs Program has allocated you a total of {{totalAllotments}} positions. You may select {{selectionTotal}}% of your positions ({{directSelectAllotments}} youth) to work for you this summer. 
+        {{#if (eq model.user.allocation_rule 2)}}
+          In May 2017, the BCYF will select the remaining half of your positions ({{lotteryAllotments}} youth) through a jobs lottery.
+        {{/if}}
+      </p>
 
       <p>In the list below, browse through applicants who have an interest in the position or area of work you offer. Starting April 5th, you may review candidates and mark "Intend to Hire" or "I do not want to hire." Any remaining youth applicants enter into the jobs lottery.</p>
 
@@ -54,6 +58,9 @@
                 </div>
               </div>
             {{/ui-accordion}}
+            <div class="ui fluid green button {{if fakeSubmitButton 'disabled'}}" onclick={{action (mut fakeSubmitButton true)}}>
+              Submit{{if fakeSubmitButton 'ted!'}}
+            </div>
           </div>
         </div>
       {{/liquid-if}}

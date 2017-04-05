@@ -2,7 +2,6 @@ import Ember from 'ember';
 import { array, math, divide } from 'ember-awesome-macros';
 import computed from 'ember-computed-decorators';
 import { flatten } from '../helpers/flatten';
-const ALLOCATION_RULE = 2;
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
@@ -29,14 +28,28 @@ export default Ember.Controller.extend({
   pickedApplicants(picks) {
     return picks.mapBy('applicant');
   },
+
+  @computed('model.picks.[]')
+  numberChosen(picks) {
+    return picks.get('length');
+  },
+
+  @computed('numberChosen', 'directSelectAllotments')
+  hasHitLimit(numberChosen, directSelectAllotments) {
+    console.log(numberChosen, directSelectAllotments);
+    return numberChosen >= directSelectAllotments;
+  },
   uniqSiteName: Ember.computed('model.user', function() {
     return this.get('model.user.positions').uniqBy('site_name').get('firstObject.site_name');
   }),
   totalAllotments: Ember.computed('model.user.positions', function() {
     return this.get('model.user.positions.firstObject.open_positions');
   }), 
-  directSelectAllotments: math.floor(divide('totalAllotments', ALLOCATION_RULE)),
-  lotteryAllotments: math.ceil(divide('totalAllotments', ALLOCATION_RULE)),
+  directSelectAllotments: math.floor(divide('totalAllotments', 'model.user.allocation_rule')),
+  lotteryAllotments: math.ceil(divide('totalAllotments', 'model.user.allocation_rule')),
+  selectionTotal: divide(100, 'model.user.allocation_rule'),
+
+  fakeSubmitButton: false,
   actions: {
     linkTo(model, event) {
       event.target.bringToFront();

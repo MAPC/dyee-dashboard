@@ -35,6 +35,9 @@
                   </div>
                 </div>
               {{/ui-accordion}}
+              <div class="ui fluid green button {{if fakeSubmitButton 'disabled'}}" onclick={{action (mut fakeSubmitButton true)}}>
+                {{if fakeSubmitButton 'Submitted!' "I'm done!"}}
+              </div>
             </div>
           {{/liquid-if}}
         {{liquid-outlet}}
