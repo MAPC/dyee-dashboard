@@ -29,11 +29,3 @@ export default DS.Model.extend({
   }),
   isSelected: false
 });
-
-
- 
- 
- 
- 
- 
- 

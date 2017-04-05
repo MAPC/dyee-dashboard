@@ -6,67 +6,69 @@
 <div class="ui basic segment">
   <div class="ui grid stackable">
     <div class="ten wide column" style="padding-right:0px;">
-      <div class='ui basic segment'>
-        <div class="ui yellow segment">
-          {{#ui-accordion}}
-            <div class="title">
-              <i class="dropdown icon"></i>
-                You intend to hire these applicants:
-            </div>
-            <div class="content">
-              <div class="ui basic segment">
-
-                {{#deferred-content model.user.positions as |d|}}
-                  {{#d.settled}}
-                    <h2>Users you're interested in</h2>
-                  {{/d.settled}}
-                  {{#d.pending}}
-                    Loading...
-                  {{/d.pending}}
-                  {{#d.fulfilled as |positions|}}
-                    {{#each positions as |position|}}
-                      <h4>{{position.title}}s at {{position.site_name}}:</h4>
-                      {{#deferred-content position.picks as |e|}}
-                        {{#e.fulfilled as |picks|}}
-                          <div class="ui ordered list">
-                            {{#each picks as |pick|}}
-                              <div class="item">
-                                {{#link-to 'applicants.show-applicant' pick.applicant.id}} 
-                                  {{pick.applicant.last_name}}, {{pick.applicant.first_name}}
-                                {{/link-to}}
-                              </div>
-                            {{/each}}
-                          </div>
-                        {{/e.fulfilled}}
-                      {{/deferred-content}}
-                    {{/each}}
-                  {{/d.fulfilled}}
-                  {{#d.rejected as |reason|}}
-                    Could not load because {{reason}}
-                  {{/d.rejected}}
-                {{/deferred-content}}
+      {{#liquid-if model.picks.length}}
+        <div class='ui basic segment'>
+          <div class="ui yellow segment">
+            {{#ui-accordion}}
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                  Our records show you intend to hire these applicants:
               </div>
-            </div>
-          {{/ui-accordion}}
+              <div class="active content">
+                <div class="ui basic segment">
+                  <div class="ui list">
+                    {{#each model.picks as |pick|}}
+                      <div class="item">
+                        <div class="right floated content">
+                          {{#ui-dropdown class="selection" selected=pick.position onChange=(action 'changePosition' pick) as |execute mapper|}}
+                            <div class="default text">Positions</div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                              {{#each model.user.positions as |position|}}
+                                <div class="item" data-value="{{map-value mapper position}}">
+                                  {{position.title}}
+                                </div>
+                              {{/each}}
+                            </div>
+                          {{/ui-dropdown}}
+                          <div class="ui button" {{action 'removePick' pick}}>Remove</div>
+                        </div>
+                        <div class="content">
+                          {{#link-to 'applicants.show-applicant' pick.applicant.id}} 
+                            {{pick.applicant.first_name}} {{pick.applicant.last_name}}
+                          {{/link-to}}
+                        </div>
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+            {{/ui-accordion}}
+          </div>
         </div>
-      </div>
+      {{/liquid-if}}
 
-      {{#liquid-if requisitionsToHire}}
+      {{#liquid-if model.requisitions}}
         <div class='ui basic segment'>
           <div class="ui yellow segment">
             {{#ui-accordion}}
               <div class="title">
                 <i class="dropdown icon"></i>
-                  You've said you will hire <b>{{requisitionsToHire.length}}/{{directSelectAllotments}}</b> people.
+                  These teens have expressed interest in your positions, but you have not yet decided whether you want to hire them:
               </div>
               <div class="content">
                 <div class="ui basic segment">
-                  <div class="ui ordered list">
-                    {{#each requisitionsToHire as |person|}}
+                  <div class="ui list">
+                    {{#each model.requisitions as |requisition|}}
                       <div class="item">
-                        {{#link-to 'applicants.show' person.id}} 
-                          {{person.applicant.last_name}}, {{person.applicant.first_name}} as {{person.position.title}} at {{person.position.site_name}}
-                        {{/link-to}}
+                        <div class="right floated menu">
+                          <div class="ui button {{if (take 1 (intersect (array requisition.applicant.id) (map-by 'id' pickedApplicants))) 'disabled'}}" {{action 'pickTeen' requisition}}>Hire This Teen</div>
+                        </div>
+                        <div class="content">
+                          {{#link-to 'applicants.show' requisition.id}} 
+                            {{requisition.applicant.first_name}} {{requisition.applicant.last_name}} as a(n) {{requisition.position.title}} at {{requisition.position.site_name}}
+                          {{/link-to}}
+                        </div>
                       </div>
                     {{/each}}
                   </div>

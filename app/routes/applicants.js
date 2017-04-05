@@ -9,6 +9,7 @@ export default Ember.Route.extend(trackPage, {
     let user = this.modelFor('application');
     return RSVP.hash({
       user,
+      picks: this.store.findAll('pick'),
       requisitions: user.get('positions').then(positions=> {
         return RSVP.all(positions.mapBy('requisitions')).then(collection=> {
           return flatten(collection);

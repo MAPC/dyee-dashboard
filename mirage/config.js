@@ -16,7 +16,9 @@ export default function() {
     return applicant.positions;
   });
 
+  this.get('picks');
   this.post('picks');
+  this.delete('picks/:id');
   this.get('picks/:id');  
   this.patch('picks/:id');  
 

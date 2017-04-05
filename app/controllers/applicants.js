@@ -25,9 +25,10 @@ export default Ember.Controller.extend({
     })
   },
 
-  requisitionsToHire: Ember.computed('model.requisitions.@each.status', function() {
-    return this.get('model.requisitions').filterBy('status', 'hire');
-  }),
+  @computed('model.picks.[]')
+  pickedApplicants(picks) {
+    return picks.mapBy('applicant');
+  },
   uniqSiteName: Ember.computed('model.user', function() {
     return this.get('model.user.positions').uniqBy('site_name').get('firstObject.site_name');
   }),
@@ -46,6 +47,22 @@ export default Ember.Controller.extend({
     },
     setMapInstance(map) {
       this.set('mapState.mapInstance', map.target);
+    },
+    changePosition(pick, position) {
+      pick.setProperties({ position });
+      pick.save();
+    },
+    removePick(pick) {
+      pick.deleteRecord();
+      pick.save();
+    },
+    pickTeen(requisition) {
+      let { applicant, position } = requisition.getProperties('applicant', 'position');
+      requisition.set('status', 'hire');
+      this.store.createRecord('pick', {
+        applicant,
+        position
+      }).save();
     }
   }
 });
