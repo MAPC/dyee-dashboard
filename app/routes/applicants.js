@@ -15,7 +15,10 @@ export default Ember.Route.extend(trackPage, {
           return flatten(collection);
         });
       }),
-      applicants: this.store.findAll('applicant')
+      applicants: user.get('positions').then(positions=> {
+        console.log(positions.mapBy('category').join(','));
+        return this.store.query('applicant', { '[interests]': positions.mapBy('category').join(',') });
+      })
     })
   }
 });

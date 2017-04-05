@@ -32,9 +32,9 @@ export default Ember.Controller.extend({
   uniqSiteName: Ember.computed('model.user', function() {
     return this.get('model.user.positions').uniqBy('site_name').get('firstObject.site_name');
   }),
-  totalAllotments: array.reduce('model.user.positions', (int, cur, i) => {
-    return int + Math.floor(cur.get('open_positions'));
-  }, 0), 
+  totalAllotments: Ember.computed('model.user.positions', function() {
+    return this.get('model.user.positions.firstObject.open_positions');
+  }), 
   directSelectAllotments: math.floor(divide('totalAllotments', ALLOCATION_RULE)),
   lotteryAllotments: math.ceil(divide('totalAllotments', ALLOCATION_RULE)),
   actions: {

@@ -58,7 +58,7 @@ module.exports = function(environment) {
   ENV['host'] = '';
 
   if (environment === 'development') {
-    ENV['host'] = 'http://localhost:4200';
+    ENV['host'] = '';
     ENV['ember-cli-mirage'] = {
       enabled: true
     }
@@ -85,7 +85,10 @@ module.exports = function(environment) {
   }
 
   if (deployTarget === 'staging') {
-    ENV.host = '';
+    ENV['ember-cli-mirage'] = {
+      enabled: false
+    }
+    ENV['host'] = 'https://dyee.mapc.org';
   }
 
   if (environment === 'cbo_development') {
