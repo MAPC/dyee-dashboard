@@ -66,6 +66,8 @@ export default Factory.extend({
     server.create('applicant', { positions: [position] });  
     server.create('requisition', { position: position, applicant: server.create('applicant') });
     server.create('requisition', { position: position, applicant: server.create('applicant') });
+    server.create('pick', { position: position, applicant: server.create('applicant') });
+    server.create('pick', { position: position, applicant: server.create('applicant') });
   }
 });
 

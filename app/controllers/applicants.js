@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import { array, math, divide } from 'ember-awesome-macros';
 import computed from 'ember-computed-decorators';
+import { flatten } from '../helpers/flatten';
 const ALLOCATION_RULE = 2;
 
 export default Ember.Controller.extend({
-  queryParams: ['email','token'],
   mapState: Ember.inject.service(),
   fields: [ 'applicant.last_name',
             'applicant.first_name',
@@ -16,17 +16,6 @@ export default Ember.Controller.extend({
                         'mobile_phone' ],
   transition: 'toUp',
 
-  @computed('model')
-  source(applicants) {
-    if (Ember.isArray(applicants)) {
-      return applicants.map((el) => { 
-        return {  title: el.get('full_name'), 
-                  id: el.get('id'), 
-                  description: `ICIMS ID: ${el.get('icims_id')}` }; 
-      });
-    }
-  },
-
   @computed('model.applicants', 'model.user.positions')
   filteredApplicants(applicants, user_positions) {
     return applicants.filter(applicant=> {
@@ -35,15 +24,17 @@ export default Ember.Controller.extend({
       });
     })
   },
-  requisitionsToHire: Ember.computed('model.requisitions.@each.status', function() {
-    return this.get('model.requisitions').filterBy('status', 'hire');
-  }),
+
+  @computed('model.picks.[]')
+  pickedApplicants(picks) {
+    return picks.mapBy('applicant');
+  },
   uniqSiteName: Ember.computed('model.user', function() {
     return this.get('model.user.positions').uniqBy('site_name').get('firstObject.site_name');
   }),
-  totalAllotments: array.reduce('model.user.positions', (int, cur, i) => {
-    return int + Math.floor(cur.get('open_positions'));
-  }, 0), 
+  totalAllotments: Ember.computed('model.user.positions', function() {
+    return this.get('model.user.positions.firstObject.open_positions');
+  }), 
   directSelectAllotments: math.floor(divide('totalAllotments', ALLOCATION_RULE)),
   lotteryAllotments: math.ceil(divide('totalAllotments', ALLOCATION_RULE)),
   actions: {
@@ -56,6 +47,22 @@ export default Ember.Controller.extend({
     },
     setMapInstance(map) {
       this.set('mapState.mapInstance', map.target);
+    },
+    changePosition(pick, position) {
+      pick.setProperties({ position });
+      pick.save();
+    },
+    removePick(pick) {
+      pick.deleteRecord();
+      pick.save();
+    },
+    pickTeen(requisition) {
+      let { applicant, position } = requisition.getProperties('applicant', 'position');
+      requisition.set('status', 'hire');
+      this.store.createRecord('pick', {
+        applicant,
+        position
+      }).save();
     }
   }
 });

@@ -1,10 +1,9 @@
-import DS from 'ember-data';
-import config from '../config/environment';
 import ApplicationAdapter from './application';
+import config from '../config/environment';
 
 export default ApplicationAdapter.extend({
-  host: Ember.computed(() => { return config.host || '/'; }),
   namespace: 'api',
+  host: config.host,
   keyForAttribute(key) {
     return key;
   }

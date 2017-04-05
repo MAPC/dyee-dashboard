@@ -16,7 +16,10 @@ export default function() {
     return applicant.positions;
   });
 
+  this.get('picks');
   this.post('picks');
+  this.delete('picks/:id');
+  this.get('picks/:id');  
   this.patch('picks/:id');  
 
   this.get('positions/:id/applicants', function({ positions }, { params }) {
@@ -43,6 +46,18 @@ export default function() {
     return position.requisitions;
   });
 
+  this.get('positions/:id/picks', function({ positions }, { params }) {
+    let position = positions.findBy({
+      id: params.id
+    });
+
+    if (!position) {
+      return [];
+    }
+
+    return position.picks;
+  });
+
   this.patch('requisitions/:id');
 
   this.get('positions/owned', function(schema, request) {
@@ -61,7 +76,9 @@ export default function() {
   this.get('positions');
   this.get('positions/:id');
   this.get('users/:id');
-  this.get('users');
+  this.get('users', (schema, request) => {
+    return schema.users.where({ id: 1 });
+  });
   this.patch('rehire_sites/:id');
   this.patch('positions/:id');
   this.patch('applicants/:id');

@@ -2,21 +2,23 @@ import Ember from 'ember';
 import RSVP from 'rsvp';
 import updateMapBounds from '../mixins/update-map-bounds';
 import { flatten } from '../helpers/flatten';
+import trackPage from '../mixins/track-page';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(trackPage, {
   model(params) {
+    let user = this.modelFor('application');
     return RSVP.hash({
-      user: this.store.query('user', { email: params.email }).then((user) => {
-        return user.get('firstObject');
-      }),
-      requisitions: this.store.query('user', { email: params.email }).then(user=> {
-        return user.get('firstObject.positions').then(positions=> {
-          return RSVP.all(positions.mapBy('requisitions')).then(collection=> {
-            return flatten(collection);
-          });
+      user,
+      picks: this.store.findAll('pick'),
+      requisitions: user.get('positions').then(positions=> {
+        return RSVP.all(positions.mapBy('requisitions')).then(collection=> {
+          return flatten(collection);
         });
       }),
-      applicants: this.store.findAll('applicant')
+      applicants: user.get('positions').then(positions=> {
+        console.log(positions.mapBy('category').join(','));
+        return this.store.query('applicant', { '[interests]': positions.mapBy('category').join(',') });
+      })
     })
   }
 });

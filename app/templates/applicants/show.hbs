@@ -1,60 +1,58 @@
-{{!-- <div class=""> --}}
-  {{#liquid-bind model use="fade" class="demo-container" as |currentModel|}} 
-    <div class="ui top attached menu">
-      {{#link-to 'applicants' class='circular accent-color ui icon item button'}}
-        <i class="icon right chevron" style="color: white;"></i>
-      {{/link-to}}
-      <div class="ui right menu">
-        {{ui-radio name="do_not_hire" class="accent-color item" label="Do not hire this person" value="do_not_hire" current=currentModel.status onChange=(action 'changeStatus')}}
-        {{ui-radio name="hire" class="accent-color item" label="I intend to hire this person" value="hire" current=currentModel.status onChange=(action 'changeStatus')}}
-      </div>
+{{#liquid-bind model use="fade" class="demo-container" as |currentModel|}} 
+  <div class="ui top attached menu">
+    {{#link-to 'applicants' class='circular accent-color ui icon item button'}}
+      <i class="icon right chevron" style="color: white;"></i>
+    {{/link-to}}
+    <div class="ui right menu">
+{{!--       {{ui-radio name="do_not_hire" class="accent-color item" label="Do not hire this person" value="do_not_hire" current=currentModel.status onChange=(action 'changeStatus')}}
+      {{ui-radio name="hire" class="accent-color item" label="I intend to hire this person" value="hire" current=currentModel.status onChange=(action 'changeStatus')}} --}}
     </div>
-    <div class="ui attached segment">
-      <h2 class="ui header">
-        <div class="content">
-          {{currentModel.applicant.first_name}} {{currentModel.applicant.last_name}}
-          <div class="sub header">Age {{currentModel.applicant.age}} | ID: {{currentModel.applicant.icims_id}}</div>
-        </div>
-      </h2>
+  </div>
+  <div class="ui attached segment">
+    <h2 class="ui header">
+      <div class="content">
+        {{currentModel.applicant.first_name}} {{currentModel.applicant.last_name}}
+        <div class="sub header">Age {{currentModel.applicant.age}} | ID: {{currentModel.applicant.icims_id}}</div>
+      </div>
+    </h2>
+    <div class="ui basic segment">
       <div class="ui basic segment">
-        <div class="ui basic segment">
-          {{list-model-attributes fields=fields model=currentModel.applicant}}
-        </div>
+        {{list-model-attributes fields=fields model=currentModel.applicant}}
+      </div>
+      <h3 class="ui secondary header">
+        Summary
+      </h3>
+      <ul class="ui list">
+        <li>{{if currentModel.applicant.in_school 'Is in school' 'Not in school'}}</li>
+        <li>{{if currentModel.applicant.bps_student 'Is a BPS student' 'Is not a BPS student'}}</li>
+        <li>{{if currentModel.applicant.english_first_language 'English is first language' 'English is not first language'}}</li>
+        {{#if currentModel.applicant.fluent_other_language}}<li> Bi-lingual </li>{{/if}}
+        {{#if currentModel.applicant.held_successlink_job_before}}<li>Has had a SuccessLink job before</li>{{/if}}
+        {{#if currentModel.applicant.wants_to_return_to_previous_job}}<li>Wants to be rehired</li>{{/if}}
+        {{#if currentModel.applicant.superteen_participant}}<li>Superteen</li>{{/if}}
+        {{#if currentModel.applicant.receive_text_messages}}<li>Receives Text Messages</li>{{/if}}
+      </ul>
+      {{#if currentModel.applicant.interests}}
         <h3 class="ui secondary header">
-          Summary
+          Interests
         </h3>
         <ul class="ui list">
-          <li>{{if currentModel.applicant.in_school 'Is in school' 'Not in school'}}</li>
-          <li>{{if currentModel.applicant.bps_student 'Is a BPS student' 'Is not a BPS student'}}</li>
-          <li>{{if currentModel.applicant.english_first_language 'English is first language' 'English is not first language'}}</li>
-          {{#if currentModel.applicant.fluent_other_language}}<li> Bi-lingual </li>{{/if}}
-          {{#if currentModel.applicant.held_successlink_job_before}}<li>Has had a SuccessLink job before</li>{{/if}}
-          {{#if currentModel.applicant.wants_to_return_to_previous_job}}<li>Wants to be rehired</li>{{/if}}
-          {{#if currentModel.applicant.superteen_participant}}<li>Superteen</li>{{/if}}
-          {{#if currentModel.applicant.receive_text_messages}}<li>Receives Text Messages</li>{{/if}}
+          {{#each currentModel.applicant.interests as |interest|}}
+            <li>{{interest}}</li>
+          {{/each}}
         </ul>
-        {{#if currentModel.applicant.interests}}
-          <h3 class="ui secondary header">
-            Interests
-          </h3>
-          <ul class="ui list">
-            {{#each currentModel.applicant.interests as |interest|}}
-              <li>{{interest}}</li>
-            {{/each}}
-          </ul>
-        {{else}}
-          <div class="ui secondary header">
-            No Interests Specified
-          </div>
-        {{/if}}
-        {{#if currentModel.applicant.participant_essay}}
-          <h3 class="ui header">
-            Essay
-          </h3>
-          {{currentModel.applicant.participant_essay}}
-        {{/if}}
-      </div>
+      {{else}}
+        <div class="ui secondary header">
+          No Interests Specified
+        </div>
+      {{/if}}
+      {{#if currentModel.applicant.participant_essay}}
+        <h3 class="ui header">
+          Essay
+        </h3>
+        {{currentModel.applicant.participant_essay}}
+      {{/if}}
     </div>
-    {{outlet}}
-  {{/liquid-bind}}
-{{!-- </div> --}}
+  </div>
+  {{outlet}}
+{{/liquid-bind}}

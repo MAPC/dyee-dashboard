@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import { truncateText } from '../helpers/truncate-text';
+
 const MAX_POSITIONS_ALLOWED = 10;
 
 export default DS.Model.extend({
@@ -62,6 +63,7 @@ export default DS.Model.extend({
     return this.get('positions.length') >= MAX_POSITIONS_ALLOWED;
   }),
   positions: DS.hasMany('position'),
+  picks: DS.hasMany('pick'),
 
   user: DS.belongsTo({ async: true }),
 

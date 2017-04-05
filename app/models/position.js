@@ -23,16 +23,9 @@ export default DS.Model.extend({
   open_positions: DS.attr('number', { defaultValue: 0 }),
   applicants: DS.hasMany('applicant'),
   requisitions: DS.hasMany('requisition'),
+  picks: DS.hasMany('pick'),
   hasExternalApp: Ember.computed('external_application_url', function() {
     return !Ember.isEmpty(this.get('external_application_url'));
   }),
   isSelected: false
 });
-
-
- 
- 
- 
- 
- 
- 

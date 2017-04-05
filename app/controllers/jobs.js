@@ -4,7 +4,6 @@ import computed from 'ember-computed-decorators';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
-  queryParams: ['token','email'],
 
   @computed('model.jobs')
   source(positions) {
