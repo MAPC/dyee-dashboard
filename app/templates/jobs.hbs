@@ -16,9 +16,9 @@
                 <div class="title">
                   <i class="dropdown icon"></i>
                   {{#if model.user.applicant.hasReachedMaxPositions}}
-                    You've expressed interest in the maximum number of positions allowed. To add another position, you must remove yourself from one other position.
+                    You have interest in the maximum number of jobs allowed. To add another job, you must remove yourself from one job.
                   {{else}}
-                    You've expressed interest in <b>{{model.user.applicant.positions.length}}/10</b> positions!
+                    You have interest in <b>{{model.user.applicant.positions.length}}/10</b> jobs!
                   {{/if}}
                 </div>
                 <div class="content">
@@ -27,7 +27,7 @@
                       {{#each model.user.applicant.positions as |position|}}
                         <div class="item">
                           {{#link-to 'jobs.show' position.id}} 
-                            {{position.site_name}} {{if position.external_application_url '(Note: this position includes an external application)'}}
+                            {{position.site_name}} {{if position.external_application_url '(Note: this job requires an external application)'}}
                           {{/link-to}}
                         </div>
                       {{/each}}
