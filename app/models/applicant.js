@@ -39,6 +39,7 @@ export default DS.Model.extend({
   other_languages: DS.attr(), 
   held_successlink_job_before: DS.attr('boolean'), 
   previous_job_site: DS.attr('string'), 
+  site_name: DS.attr('string'),
   wants_to_return_to_previous_job: DS.attr('boolean'), 
   superteen_participant: DS.attr('boolean'), 
   participant_essay: DS.attr('string'), 
