@@ -20,7 +20,6 @@ export default DS.Model.extend({
   updated_at: DS.attr('date'),
   lottery_number: DS.attr('number'),
   interests: DS.attr(),
-  age: DS.attr('number'),
   position_location: DS.attr('string'),
   position_role: DS.attr('string'),  
   grid_id: DS.attr('number'),
