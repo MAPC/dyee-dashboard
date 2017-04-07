@@ -34,8 +34,8 @@ export default Factory.extend({
   description() { return faker.lorem.paragraph(); },
   open_positions() { return faker.random.number(
                       {
-                        'min': 3,
-                        'max': 50
+                        'min': 13,
+                        'max': 20
                       }); 
   },
   // interests(i) {

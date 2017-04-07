@@ -15,6 +15,7 @@ export default DS.Model.extend({
   site_phone: DS.attr('number'),
   duties_responsbilities: DS.attr('string'),
   ideal_candidate: DS.attr('string'),
+  neighborhood: DS.attr('string'),
   owned: collectionAction({
     path: 'owned',
     type: 'get',

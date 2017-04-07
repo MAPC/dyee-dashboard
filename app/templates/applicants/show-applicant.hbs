@@ -7,7 +7,7 @@
       {{/link-to}}
       <div class="ui right menu">
         <div class="item">
-          {{#link-to 'applicants.show-applicant.new-pick' tagName='div' class=(concat 'ui button accent-color' (if hasHitLimit ' disabled' ))}}
+          {{#link-to 'applicants.show-applicant.new-pick' tagName='div' class=(concat 'ui button accent-color' (if ac.hasHitLimit ' disabled' ''))}}
             <i class="icon star" style="color: white;"></i> Pick This Applicant
           {{/link-to}}
         </div>

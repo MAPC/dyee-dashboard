@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     return positions.map((el) => { 
       return {  title: `${el.get('site_name')} (${el.get('category')})`, 
                 id: el.get('id'), 
-                description: el.get('category') }; 
+                description: `${el.get('category')}, ${el.get('neighborhood')}` }; 
     });
   },
 

@@ -18,5 +18,6 @@ export default Ember.Controller.extend({
     changeStatus() {
       
     }
-  }
+  },
+  ac: Ember.inject.controller('applicants')
 });

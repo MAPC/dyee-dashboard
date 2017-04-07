@@ -27,6 +27,7 @@ export default DS.Model.extend({
   guardian_name: DS.attr('string'), 
   guardian_phone: DS.attr('string'), 
   guardian_email: DS.attr('string'), 
+  neighborhood: DS.attr('string'), 
   in_school: DS.attr('boolean'), 
   school_type: DS.attr('string'), 
   bps_student: DS.attr('boolean'), 

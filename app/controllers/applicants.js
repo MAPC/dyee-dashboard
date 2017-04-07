@@ -5,12 +5,12 @@ import { flatten } from '../helpers/flatten';
 
 export default Ember.Controller.extend({
   queryParams: ['min','max'],
-  fields: [ 'applicant.last_name',
-            'applicant.first_name',
+  fields: [ 'applicant.first_name',
+            'applicant.last_name',
             'position.title',
             'status' ],
-  applicants_fields: [  'last_name',
-                        'first_name',
+  applicants_fields: [  'first_name',
+                        'last_name',
                         'email',
                         'mobile_phone' ],
   transition: 'toUp',
@@ -65,7 +65,7 @@ export default Ember.Controller.extend({
   },
   @computed('model.applicants','min','max','perPage')
   paginatedModels(model,min,max) {
-    return model.slice(min,max);
+    return model.slice(min,max).sortBy('last_name');
   },
   actions: {
     previous() {

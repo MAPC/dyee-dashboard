@@ -26,7 +26,7 @@
             {{#ui-accordion}}
               <div class="active title">
                 <i class="dropdown icon"></i>
-                  Our records show you intend to hire these applicants:
+                  Our records show you intend to hire these applicants. <strong>You have {{model.picks.length}} of {{directSelectAllotments}} left</strong>:
               </div>
               <div class="active content">
                 <div class="ui basic segment">
@@ -79,7 +79,7 @@
                     {{#each model.requisitions as |requisition|}}
                       <div class="item">
                         <div class="right floated menu">
-                          <div class="ui button {{if (take 1 (intersect (array requisition.applicant.id) (map-by 'id' pickedApplicants))) 'disabled'}}" {{action 'pickTeen' requisition}}>Hire This Teen</div>
+                          <div class="ui button {{if (or (take 1 (intersect (array requisition.applicant.id) (map-by 'id' pickedApplicants))) hasHitLimit) 'disabled'}}" {{action 'pickTeen' requisition}}>Hire This Teen</div>
                         </div>
                         <div class="content">
                           {{#link-to 'applicants.show' requisition.id}} 
@@ -101,7 +101,7 @@
       </div>
       <div class="ui basic segment">
         {{#ui-search class="ui search fluid category-search" searchFields=(array 'description' 'title') searchFullText=true onSelect=(action 'linkToApplicant') source=source}}
-          <input class="prompt category-search" type="text" placeholder="Search by Name">
+          <input class="prompt category-search" type="text" placeholder="Enter first and last name to search">
           <div class="results"></div>
         {{/ui-search}}
       </div>
