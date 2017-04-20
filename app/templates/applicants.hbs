@@ -7,7 +7,6 @@
   <div class="ui grid stackable">
     <div class="ten wide column" style="padding-right:0px;">
       <h1 class="ui header">Welcome, {{uniqSiteName}}</h1>
-
       <p>The BCYF Youth Engagement and Employment Summer Jobs Program has allocated you a total of {{totalAllotments}} positions. You may select {{selectionTotal}}% of your positions ({{directSelectAllotments}} youth) to work for you this summer. 
         {{#if (eq model.user.allocation_rule 2)}}
           In May 2017, the BCYF will select the remaining half of your positions ({{lotteryAllotments}} youth) through a jobs lottery.
@@ -58,7 +57,7 @@
                 </div>
               </div>
             {{/ui-accordion}}
-            <div class="ui fluid green button {{if fakeSubmitButton 'disabled'}}" onclick={{action (mut fakeSubmitButton true)}}>
+            <div class="ui fluid green button {{if fakeSubmitButton 'disabled'}}" onclick={{action 'hirePickedTeens'}}>
               Submit{{if fakeSubmitButton 'ted!'}}
             </div>
           </div>
