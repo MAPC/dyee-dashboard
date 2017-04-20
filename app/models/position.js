@@ -10,6 +10,7 @@ export default DS.Model.extend({
   external_application_url: DS.attr('string'),
   primary_contact_person: DS.attr('string'),
   primary_contact_person_title: DS.attr('string'),
+  primary_contact_person_email: DS.attr('string'),
   address: DS.attr('string'),
   primary_contact_person_phone: DS.attr('string'),
   site_phone: DS.attr('number'),
