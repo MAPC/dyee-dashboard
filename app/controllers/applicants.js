@@ -63,10 +63,21 @@ export default Ember.Controller.extend({
   page(max, perPage) {
     return Math.round(max/perPage);
   },
+
+  @computed('model.applicants', 'model.user.positions')
+  filteredApplicants(applicants, user_positions) {
+    return applicants.filter(applicant=> {
+      return user_positions.mapBy('category').some(category=>{
+        return applicant.get('interests').includes(category);
+      });
+    })
+  },
+
   @computed('model.applicants','min','max','perPage')
   paginatedModels(model,min,max) {
     return model.slice(min,max).sortBy('last_name');
   },
+
   actions: {
     previous() {
       let { min, max, perPage } = this.getProperties('min','max','perPage');
@@ -87,8 +98,9 @@ export default Ember.Controller.extend({
       this.set('max', perPage);
     },
     last() {
-      let { model, perPage } = this.getProperties('model','perPage');
-      let count = model.applicants.get('length');
+      let applicants = this.get('model.applicants');
+      let perPage = this.get('perPage');
+      let count = applicants.get('length');
       this.set('transition', 'toUp');
       this.set('min', Math.floor(count / perPage) * perPage );
       this.set('max', (Math.floor(count / perPage) * perPage) + perPage);
@@ -115,10 +127,18 @@ export default Ember.Controller.extend({
     pickTeen(requisition) {
       let { applicant, position } = requisition.getProperties('applicant', 'position');
       requisition.set('status', 'hire');
+      requisition.save();
       this.store.createRecord('pick', {
         applicant,
         position
       }).save();
+    },
+    hirePickedTeens() {
+      let picks = this.get('model.picks');
+
+      picks.invoke('set', 'status', 'hire');
+      picks.invoke('save');
+      this.set('fakeSubmitButton', true);
     }
   }
 });

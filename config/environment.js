@@ -84,24 +84,22 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (deployTarget === 'staging') {
-    ENV['ember-cli-mirage'] = {
-      enabled: false
-    }
-    ENV['host'] = 'https://dyee.mapc.org';
-  }
-
   if (environment === 'cbo_development') {
     ENV['host'] = 'http://localhost:3000';
   }
 
+  if (deployTarget === 'staging') {
+    ENV['ember-cli-mirage'] = {
+      enabled: false
+    }
+    ENV['host'] = 'https://dyee-staging.mapc.org';
+  }
+
   if (environment === 'staging') {
     ENV['ember-cli-mirage'] = {
-      enabled: true,
-      namespace: '/api',
+      enabled: false
     }
-    ENV['baseURL'] = 'https://dyee-dashboard.staging.pagefrontapp.com';
-    ENV['host'] = '';
+    ENV['host'] = 'https://dyee-staging.mapc.org';
   }
 
   if (environment === 'production') {

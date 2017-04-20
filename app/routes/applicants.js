@@ -16,8 +16,7 @@ export default Ember.Route.extend(trackPage, {
         });
       }),
       applicants: user.get('positions').then(positions=> {
-        console.log(positions.mapBy('category').join(','));
-        return this.store.query('applicant', { 'interests': positions.mapBy('category') });
+        return this.store.findAll('applicant');
       })
     })
   }

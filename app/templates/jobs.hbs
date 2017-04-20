@@ -49,7 +49,10 @@
           <input class="prompt category-search" type="text" placeholder="Search by Category">
           <div class="results"></div>
         {{/ui-search}}
-        <div class="ui segment map-ui-segment">
+        <div class="ui top attached header">
+          Explore Youth Jobs
+        </div>
+        <div class="ui attached segment map-ui-segment">
           {{#leaflet-map onLoad=(action 'setMapInstance') onMoveend=(action 'resetMap') bounds=mapState.bounds}}
             {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
             {{#each clusters as |site|}}

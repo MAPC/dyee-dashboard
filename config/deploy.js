@@ -1,7 +1,18 @@
 module.exports = function(deployTarget) {  
   let ENV = {
     build: {
-      environment: deployTarget === 'development' ? 'development' : 'production'
+      environment: function() {
+        if (deployTarget === 'development') {
+          return 'development'
+        }
+        if (deployTarget === 'staging') {
+          return 'staging'
+        }
+        if (deployTarget === 'production') {
+          return 'production'
+        }
+
+      }
     },
     pagefront: {
       app: 'dyee-dashboard',
